@@ -15,8 +15,14 @@
       </app-header>
 
       <var-paper :elevation="1" class="menu-list">
-        <var-cell v-for="(item, index) in items" :key="item.name" ripple :icon="item.icon"
-          :border="index !== items.length - 1" :border-offset="0">
+        <var-cell
+          v-for="(item, index) in items"
+          :key="item.name"
+          ripple
+          :icon="item.icon"
+          :border="index !== items.length - 1"
+          :border-offset="0"
+        >
           {{ item.name }}
 
           <template #extra>
@@ -26,8 +32,14 @@
       </var-paper>
 
       <var-paper :elevation="1" class="menu-list">
-        <var-cell v-for="(item, index) in items" :key="item.name" ripple :icon="item.icon"
-          :border="index !== items.length - 1" :border-offset="0">
+        <var-cell
+          v-for="(item, index) in items"
+          :key="item.name"
+          ripple
+          :icon="item.icon"
+          :border="index !== items.length - 1"
+          :border-offset="0"
+        >
           {{ item.name }}
 
           <template #extra>
@@ -91,18 +103,17 @@ function handleRefresh() {
 }
 </style>
 
-<route lang="json">{
+<route lang="json">
+{
   "meta": {
     "stacks": [
       "sign-up",
       "settings",
       {
         "name": "sign-in",
-        "children": [
-          "sign-up",
-          "forgot-password"
-        ]
+        "children": ["sign-up", "forgot-password"]
       }
     ]
   }
-}</route>
+}
+</route>

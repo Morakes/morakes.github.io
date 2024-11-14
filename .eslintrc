@@ -25,24 +25,24 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-empty-function": "off",
     "perfectionist/sort-imports": "off",
-      "perfectionist/sort-exports": "off",
-      "perfectionist/sort-named-exports": "off",
-      // 组件必须为短横杆命名
-      "vue/component-name-in-template-casing": [
-        "error",
-        "kebab-case",
-        {
-          "registeredComponentsOnly": false,
-          "ignores": []
-        }
-      ],
-      // Vue 代码块顺序
-      "vue/block-order": [
-        "error",
-        {
-          "order": ["template", "script", "style"]
-        }
-      ]
+    "perfectionist/sort-exports": "off",
+    "perfectionist/sort-named-exports": "off",
+    // 组件必须为短横杆命名
+    "vue/component-name-in-template-casing": [
+      "error",
+      "kebab-case",
+      {
+        "registeredComponentsOnly": false,
+        "ignores": []
+      }
+    ],
+    // Vue 代码块顺序
+    "vue/block-order": [
+      "error",
+      {
+        "order": ["template", "script", "style"]
+      }
+    ]
   },
   "globals": {
     "Dict": true,

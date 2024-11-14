@@ -50,12 +50,7 @@ module.exports = {
     confirmCommit: '是否确实要继续上述提交？',
   },
   // 定义影响的范围
-  scopes: [
-    { name: '配置' },
-    { name: '构建' },
-    { name: '视图' },
-    { name: '全局' },
-  ],
+  scopes: [{ name: '配置' }, { name: '构建' }, { name: '视图' }, { name: '全局' }],
   // 跳过问题
   skipQuestions: ['body', 'footer'],
   // 允许自定义的scope

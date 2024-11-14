@@ -1,11 +1,9 @@
-<script setup lang="ts">
-const value = ref(false)
-const sliderValue = ref(0)
-</script>
-
 <template>
   <router-stack>
-    <var-style-provider class="pt-[var(--app-bar-height)]" :style-vars="{ '--cell-padding': '16px 12px' }">
+    <var-style-provider
+      class="pt-[var(--app-bar-height)]"
+      :style-vars="{ '--cell-padding': '16px 12px' }"
+    >
       <app-header :title="$t('Settings')">
         <template #left>
           <app-back />
@@ -65,6 +63,11 @@ const sliderValue = ref(0)
     </var-style-provider>
   </router-stack>
 </template>
+
+<script setup lang="ts">
+const value = ref(false)
+const sliderValue = ref(0)
+</script>
 
 <style lang="less" scoped>
 .settings {

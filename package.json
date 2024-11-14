@@ -10,7 +10,7 @@
     "build:test": "vite build --mode test",
     "build:icons": "vi build",
     "preview": "vite preview",
-    "lint:fix": "eslint . --fix",
+    "fix": "eslint --fix --ext .js,.ts,.vue src",
     "format": "prettier --write .",
     "type-check": "vue-tsc --noEmit",
     "bump": "bun update @varlet/* rattail --latest",
@@ -28,7 +28,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,.vue}": [
+    "*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
       "prettier --write",
       "eslint --fix"
     ],

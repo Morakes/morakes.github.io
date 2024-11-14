@@ -1,30 +1,3 @@
-<script setup lang="ts">
-import { Form } from '@varlet/ui'
-import { validateNotEmpty } from '@/utils/validate'
-
-const { pushStack } = useAppRouter()
-const { t } = useI18n()
-const form = ref<Form>()
-const isViewPassword = ref(false)
-const account = reactive({
-  username: '',
-  password: ''
-})
-
-async function submit() {
-  const valid = await form.value?.validate()
-
-  if (valid) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        Snackbar.success(t('Submit Success'))
-        resolve(undefined)
-      }, 1000)
-    })
-  }
-}
-</script>
-
 <template>
   <router-stack>
     <div class="sign-in">
@@ -71,7 +44,9 @@ async function submit() {
             <var-checkbox>{{ $t('Remember Me') }}</var-checkbox>
             <span @click="pushStack('/forgot-password')">{{ $t('Forgot Password') }}?</span>
           </var-space>
-          <var-button type="primary" block size="large" auto-loading @click="submit">{{ $t('Sign In') }}</var-button>
+          <var-button type="primary" block size="large" auto-loading @click="submit">{{
+            $t('Sign In')
+          }}</var-button>
           <var-space class="sign-in-form-text" justify="center" @click="pushStack('/sign-up')">
             {{ $t('Click to sign up') }}
           </var-space>
@@ -80,6 +55,33 @@ async function submit() {
     </div>
   </router-stack>
 </template>
+
+<script setup lang="ts">
+import { Form } from '@varlet/ui'
+import { validateNotEmpty } from '@/utils/validate'
+
+const { pushStack } = useAppRouter()
+const { t } = useI18n()
+const form = ref<Form>()
+const isViewPassword = ref(false)
+const account = reactive({
+  username: '',
+  password: '',
+})
+
+async function submit() {
+  const valid = await form.value?.validate()
+
+  if (valid) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        Snackbar.success(t('Submit Success'))
+        resolve(undefined)
+      }, 1000)
+    })
+  }
+}
+</script>
 
 <style lang="less" scoped>
 .sign-in {

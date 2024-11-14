@@ -1,11 +1,3 @@
-<script setup lang="ts">
-const isRefresh = ref(false)
-
-function handleRefresh() {
-  isRefresh.value = false
-}
-</script>
-
 <template>
   <var-pull-refresh
     class="pt-[calc(var(--app-bar-height)+10px)] pb-[10px]"
@@ -27,7 +19,9 @@ function handleRefresh() {
       <div class="w-[274px] b-b border-outline">
         <div class="flex justify-between items-center">
           <div class="text-lg w-[190px] text-inverse-surface">
-            <var-ellipsis style="max-width: 100%" :tooltip="false">{{ $t('Section title') }}</var-ellipsis>
+            <var-ellipsis style="max-width: 100%" :tooltip="false">{{
+              $t('Section title')
+            }}</var-ellipsis>
           </div>
           <div class="text-md text-tertiary mb-[2px]">2023-07-27</div>
         </div>
@@ -40,6 +34,14 @@ function handleRefresh() {
 
   <router-stack-view />
 </template>
+
+<script setup lang="ts">
+const isRefresh = ref(false)
+
+function handleRefresh() {
+  isRefresh.value = false
+}
+</script>
 
 <route lang="json">
 {

@@ -31,20 +31,20 @@ const tabs = ref([
     label: 'HOME',
     icon: 'tabbar-home-light',
     namespace: 'i',
-    name: '/layout/home'
+    name: '/layout/home',
   },
   {
     label: 'STAR',
     icon: 'tabbar-star-dark',
     name: '/layout/star',
-    namespace: 'i'
+    namespace: 'i',
   },
   {
     label: 'USER',
     icon: 'tabbar-user-light',
     name: '/layout/user',
-    namespace: 'i'
-  }
+    namespace: 'i',
+  },
 ])
 
 watch(

@@ -10,7 +10,6 @@
             <var-icon name="content-copy" :size="13" />
           </div>
         </div>
-
       </var-space>
     </div>
   </div>

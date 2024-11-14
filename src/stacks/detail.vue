@@ -1,13 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const isRefresh = ref(false)
-
-function handleRefresh() {
-  isRefresh.value = false
-}
-</script>
-
 <template>
   <router-stack>
     <div class="pt-[var(--app-bar-height)]">
@@ -42,10 +32,20 @@ function handleRefresh() {
             />
           </var-swipe-item>
           <var-swipe-item>
-            <var-image class="pointer-events-none" fit="cover" height="54vmin" src="@/assets/images/material-2.png" />
+            <var-image
+              class="pointer-events-none"
+              fit="cover"
+              height="54vmin"
+              src="@/assets/images/material-2.png"
+            />
           </var-swipe-item>
           <var-swipe-item>
-            <var-image class="pointer-events-none" fit="cover" height="54vmin" src="@/assets/images/material-2.png" />
+            <var-image
+              class="pointer-events-none"
+              fit="cover"
+              height="54vmin"
+              src="@/assets/images/material-2.png"
+            />
           </var-swipe-item>
         </var-swipe>
 
@@ -66,7 +66,10 @@ function handleRefresh() {
             <var-space :size="['5vmin', '4vmin']">
               <var-chip class="p-0!" v-for="i in 8" :key="i">
                 <template #left>
-                  <var-avatar class="w-[32px]! h-[32px]! mr-[2px]" src="@/assets/images/avatar.jpg" />
+                  <var-avatar
+                    class="w-[32px]! h-[32px]! mr-[2px]"
+                    src="@/assets/images/avatar.jpg"
+                  />
                 </template>
                 <var-ellipsis class="max-w-[100px]" :tooltip="{ sameWidth: false }">
                   {{ $t('This is a comment') }}
@@ -88,7 +91,9 @@ function handleRefresh() {
               :model-value="3.5"
             />
 
-            <div class="text-tertiary text-md">{{ $t('A total of {count} comments', { count: 100 }) }}</div>
+            <div class="text-tertiary text-md">
+              {{ $t('A total of {count} comments', { count: 100 }) }}
+            </div>
           </div>
         </div>
 
@@ -105,3 +110,13 @@ function handleRefresh() {
     </div>
   </router-stack>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const isRefresh = ref(false)
+
+function handleRefresh() {
+  isRefresh.value = false
+}
+</script>

@@ -1,8 +1,13 @@
 <template>
   <teleport to="body" v-if="activated">
     <router-view v-slot="{ Component }">
-      <transition :name="transitionName" @before-enter="handlePush" @after-enter="$emit('pushed')"
-        @before-leave="$emit('pop', pushedPath)" @after-leave="$emit('popped', pushedPath)">
+      <transition
+        :name="transitionName"
+        @before-enter="handlePush"
+        @after-enter="$emit('pushed')"
+        @before-leave="$emit('pop', pushedPath)"
+        @after-leave="$emit('popped', pushedPath)"
+      >
         <component :is="Component" />
       </transition>
     </router-view>
@@ -13,15 +18,15 @@
 import { useAppRouter } from '@/use'
 
 defineOptions({
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const props = defineProps({
   animation: {
     type: String,
     // slide-x slide-y
-    default: 'slide-x'
-  }
+    default: 'slide-x',
+  },
 })
 
 const transitionName = computed(() => {

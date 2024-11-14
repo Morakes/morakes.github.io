@@ -1,3 +1,24 @@
+<template>
+  <div class="router-stack" ref="stack" :style="{ zIndex }">
+    <keep-alive v-if="keepAlive">
+      <div v-if="showParent">
+        <slot />
+      </div>
+    </keep-alive>
+    <div v-show="showParent" v-else>
+      <slot />
+    </div>
+
+    <router-stack-view
+      :animation="animation"
+      @push="$emit('push')"
+      @pushed="$emit('pushed')"
+      @pop="$emit('pop')"
+      @popped="$emit('popped')"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { useZIndex } from '@/use'
 import { useParent, useChildren } from '@varlet/use'
@@ -6,11 +27,11 @@ import { watch, ref, nextTick } from 'vue'
 defineProps({
   keepAlive: {
     type: Boolean,
-    default: true
+    default: true,
   },
   animation: {
-    type: String
-  }
+    type: String,
+  },
 })
 
 defineEmits(['push', 'pushed', 'pop', 'popped'])
@@ -47,27 +68,6 @@ watch(
   }
 )
 </script>
-
-<template>
-  <div class="router-stack" ref="stack" :style="{ zIndex }">
-    <keep-alive v-if="keepAlive">
-      <div v-if="showParent">
-        <slot />
-      </div>
-    </keep-alive>
-    <div v-show="showParent" v-else>
-      <slot />
-    </div>
-
-    <router-stack-view
-      :animation="animation"
-      @push="$emit('push')"
-      @pushed="$emit('pushed')"
-      @pop="$emit('pop')"
-      @popped="$emit('popped')"
-    />
-  </div>
-</template>
 
 <style lang="less" scoped>
 .router-stack {

@@ -1,28 +1,3 @@
-<script setup lang="ts">
-import { validateEmail, validateLength } from '@/utils/validate'
-import { Form } from '@varlet/ui'
-
-const { t } = useI18n()
-const form = ref<Form>()
-const account = reactive({
-  email: '',
-  verifyCode: ''
-})
-
-async function submit() {
-  const valid = await form.value?.validate()
-
-  if (valid) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        Snackbar.success(t('Submit Success'))
-        resolve(undefined)
-      }, 1000)
-    })
-  }
-}
-</script>
-
 <template>
   <router-stack>
     <div class="forgot-password">
@@ -54,12 +29,39 @@ async function submit() {
               <var-icon class="forgot-password-form-input-icon" name="card-account-details" />
             </template>
           </var-input>
-          <var-button type="primary" block size="large" auto-loading @click="submit">{{ $t('Submit') }}</var-button>
+          <var-button type="primary" block size="large" auto-loading @click="submit">{{
+            $t('Submit')
+          }}</var-button>
         </var-space>
       </var-form>
     </div>
   </router-stack>
 </template>
+
+<script setup lang="ts">
+import { validateEmail, validateLength } from '@/utils/validate'
+import { Form } from '@varlet/ui'
+
+const { t } = useI18n()
+const form = ref<Form>()
+const account = reactive({
+  email: '',
+  verifyCode: '',
+})
+
+async function submit() {
+  const valid = await form.value?.validate()
+
+  if (valid) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        Snackbar.success(t('Submit Success'))
+        resolve(undefined)
+      }, 1000)
+    })
+  }
+}
+</script>
 
 <style lang="less" scoped>
 .forgot-password {

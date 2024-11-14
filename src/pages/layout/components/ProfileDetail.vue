@@ -3,7 +3,9 @@
     <var-space direction="column" :size="['6vmin', 0]">
       <div class="mt-[10px]">
         <div class="text-tertiary text-md mb-[14px] px-[24px]">{{ $t('About Me') }}</div>
-        <div class="text-tertiary text-md px-[24px] line-height-[26px]">{{ $t('Section Text') }}</div>
+        <div class="text-tertiary text-md px-[24px] line-height-[26px]">
+          {{ $t('Section Text') }}
+        </div>
       </div>
 
       <div class="mt-[10px]">
@@ -43,7 +45,12 @@
       <div class="mt-[10px]">
         <div class="text-tertiary text-md mb-[14px] px-[24px]">{{ $t('Followers') }} (10086)</div>
         <var-avatar-group class="mt-[12px] px-[20px]" offset="-2vmin">
-          <var-avatar src="https://varlet.pages.dev/cat.jpg" size="12vmin" v-for="i in 7" :key="i" />
+          <var-avatar
+            src="https://varlet.pages.dev/cat.jpg"
+            size="12vmin"
+            v-for="i in 7"
+            :key="i"
+          />
           <var-avatar size="13vmin">+10086</var-avatar>
         </var-avatar-group>
       </div>
@@ -53,7 +60,12 @@
       <div class="mt-[10px]">
         <div class="text-tertiary text-md mb-[14px] px-[24px]">{{ $t('Following') }} (10086)</div>
         <var-avatar-group class="mt-[12px] px-[20px]">
-          <var-avatar src="https://varlet.pages.dev/cat.jpg" size="12vmin" v-for="i in 7" :key="i" />
+          <var-avatar
+            src="https://varlet.pages.dev/cat.jpg"
+            size="12vmin"
+            v-for="i in 7"
+            :key="i"
+          />
           <var-avatar size="13vmin">+10086</var-avatar>
         </var-avatar-group>
       </div>

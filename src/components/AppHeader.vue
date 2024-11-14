@@ -22,11 +22,11 @@ import { PropType } from 'vue'
 
 defineProps({
   title: {
-    type: String as PropType<AppBarProps['title']>
+    type: String as PropType<AppBarProps['title']>,
   },
   titlePosition: {
     type: String as PropType<AppBarProps['titlePosition']>,
-    default: 'center'
-  }
+    default: 'center',
+  },
 })
 </script>

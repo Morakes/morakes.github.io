@@ -1,3 +1,14 @@
+<template>
+  <div class="w-screen h-screen flex justify-center items-center">
+    <iframe
+      ref="iframeRef"
+      style="width: 500px"
+      class="h-full border-none"
+      src="./index.html"
+    ></iframe>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { useDark } from './use'
 
@@ -23,12 +34,9 @@ window.addEventListener('message', (event) => {
 window.addEventListener('hashchange', notify)
 
 function notify() {
-  iframeRef.value?.contentWindow?.postMessage({ type: 'route-change', path: window.location.hash.slice(1) }, '*')
+  iframeRef.value?.contentWindow?.postMessage(
+    { type: 'route-change', path: window.location.hash.slice(1) },
+    '*'
+  )
 }
 </script>
-
-<template>
-  <div class="w-screen h-screen flex justify-center items-center">
-    <iframe ref="iframeRef" style="width: 500px" class="h-full border-none" src="./index.html"></iframe>
-  </div>
-</template>

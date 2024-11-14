@@ -1,38 +1,3 @@
-<script setup lang="ts">
-const items = ref([
-  {
-    name: 'Vue',
-    icon: 'star',
-    enabled: false
-  },
-  {
-    name: 'Vue',
-    icon: 'star',
-    enabled: false
-  },
-  {
-    name: 'Vue',
-    icon: 'star',
-    enabled: false
-  },
-  {
-    name: 'Vue',
-    icon: 'star',
-    enabled: false
-  },
-  {
-    name: 'Vue',
-    icon: 'star',
-    enabled: false
-  },
-  {
-    name: 'Vue',
-    icon: 'star',
-    enabled: false
-  }
-])
-</script>
-
 <template>
   <div class="pt-[10px] pb-[16px] px-[10px]">
     <var-paper :elevation="2">
@@ -52,3 +17,38 @@ const items = ref([
     </var-paper>
   </div>
 </template>
+
+<script setup lang="ts">
+const items = ref([
+  {
+    name: 'Vue',
+    icon: 'star',
+    enabled: false,
+  },
+  {
+    name: 'Vue',
+    icon: 'star',
+    enabled: false,
+  },
+  {
+    name: 'Vue',
+    icon: 'star',
+    enabled: false,
+  },
+  {
+    name: 'Vue',
+    icon: 'star',
+    enabled: false,
+  },
+  {
+    name: 'Vue',
+    icon: 'star',
+    enabled: false,
+  },
+  {
+    name: 'Vue',
+    icon: 'star',
+    enabled: false,
+  },
+])
+</script>

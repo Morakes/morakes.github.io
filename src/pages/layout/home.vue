@@ -9,7 +9,12 @@
         <app-theme-switch />
       </template>
       <template #content>
-        <var-tabs color="transparent" active-color="#fff" inactive-color="#ddd" v-model:active="active">
+        <var-tabs
+          color="transparent"
+          active-color="#fff"
+          inactive-color="#ddd"
+          v-model:active="active"
+        >
           <var-tab name="list">{{ $t('Card List') }}</var-tab>
           <var-tab name="rowList">{{ $t('Card List') }}</var-tab>
           <var-tab name="plainList">{{ $t('Card List') }}</var-tab>
@@ -20,8 +25,12 @@
     <var-pull-refresh v-model="isRefresh" @refresh="handleRefresh">
       <var-tabs-items v-model:active="active">
         <var-tab-item class="min-h-[calc(var(--app-height)-190px)]" name="list">
-          <var-list :finished="list.finished" v-model:loading="isItemsLoading" v-model:error="list.error"
-            @load="() => getItems({ params: { current: list.current } })">
+          <var-list
+            :finished="list.finished"
+            v-model:loading="isItemsLoading"
+            v-model:error="list.error"
+            @load="() => getItems({ params: { current: list.current } })"
+          >
             <var-space class="p-[4px]" direction="column" :size="['5vmin', 0]">
               <!-- <var-card
                 :title="$t('Card Title')"
@@ -44,16 +53,27 @@
                   </var-space>
                 </template>
               </var-card> -->
-
             </var-space>
           </var-list>
         </var-tab-item>
         <var-tab-item class="min-h-[calc(var(--app-height)-190px)]" name="rowList">
-          <var-list :finished="rowList.finished" v-model:loading="isRowItemsLoading" v-model:error="rowList.error"
-            @load="() => getRowItems({ params: { current: rowList.current } })">
+          <var-list
+            :finished="rowList.finished"
+            v-model:loading="isRowItemsLoading"
+            v-model:error="rowList.error"
+            @load="() => getRowItems({ params: { current: rowList.current } })"
+          >
             <var-space class="p-[4px]" direction="column" :size="['5vmin', 0]">
-              <var-card :title="$t('Card Title')" :subtitle="$t('Card Subtitle')" src="@/assets/images/material-1.png"
-                layout="row" ripple v-for="i in rowList.items" :key="i" @click="handleClick">
+              <var-card
+                :title="$t('Card Title')"
+                :subtitle="$t('Card Subtitle')"
+                src="@/assets/images/material-1.png"
+                layout="row"
+                ripple
+                v-for="i in rowList.items"
+                :key="i"
+                @click="handleClick"
+              >
                 <template #extra>
                   <var-button text round @touchstart.stop @click.stop>
                     <var-icon name="star" />
@@ -67,11 +87,21 @@
           </var-list>
         </var-tab-item>
         <var-tab-item class="min-h-[calc(var(--app-height)-190px)]" name="plainList">
-          <var-list :finished="plainList.finished" v-model:loading="isPlainItemsLoading" v-model:error="plainList.error"
-            @load="() => getPlainItems({ params: { current: plainList.current } })">
+          <var-list
+            :finished="plainList.finished"
+            v-model:loading="isPlainItemsLoading"
+            v-model:error="plainList.error"
+            @load="() => getPlainItems({ params: { current: plainList.current } })"
+          >
             <var-space class="p-[4px]" direction="column" :size="['5vmin', 0]">
-              <var-card :title="$t('Card Title')" :subtitle="$t('Card Subtitle')" ripple v-for="i in plainList.items"
-                :key="i" @click="handleClick">
+              <var-card
+                :title="$t('Card Title')"
+                :subtitle="$t('Card Subtitle')"
+                ripple
+                v-for="i in plainList.items"
+                :key="i"
+                @click="handleClick"
+              >
                 <template #description>
                   <var-ellipsis class="var-card__description" :line-clamp="6" :tooltip="false">
                     {{ $t('Card Description') }}
@@ -109,10 +139,10 @@ const [list, getItems, { loading: isItemsLoading }] = apiGetItems.use<List>({
     items: [],
     current: 1,
     error: false,
-    finished: false
+    finished: false,
   },
   onTransform,
-  onError
+  onError,
 })
 
 const [plainList, getPlainItems, { loading: isPlainItemsLoading }] = apiGetPlainItems.use<List>({
@@ -120,10 +150,10 @@ const [plainList, getPlainItems, { loading: isPlainItemsLoading }] = apiGetPlain
     items: [],
     current: 1,
     error: false,
-    finished: false
+    finished: false,
   },
   onTransform,
-  onError
+  onError,
 })
 
 const [rowList, getRowItems, { loading: isRowItemsLoading }] = apiGetRowItems.use<List>({
@@ -131,10 +161,10 @@ const [rowList, getRowItems, { loading: isRowItemsLoading }] = apiGetRowItems.us
     items: [],
     current: 1,
     error: false,
-    finished: false
+    finished: false,
   },
   onTransform,
-  onError
+  onError,
 })
 
 function onTransform(response: Res<Item[]>, { value }: UseAxleRefs<List>) {
@@ -142,7 +172,7 @@ function onTransform(response: Res<Item[]>, { value }: UseAxleRefs<List>) {
     return {
       ...value.value,
       finished: false,
-      error: true
+      error: true,
     }
   }
 
@@ -150,7 +180,7 @@ function onTransform(response: Res<Item[]>, { value }: UseAxleRefs<List>) {
     items: [...value.value.items, ...response.data],
     current: value.value.current + 1,
     finished: response.data.length < 10,
-    error: false
+    error: false,
   }
 }
 
@@ -163,7 +193,7 @@ async function handleRefresh() {
   const loaders = {
     list: getItems,
     rowList: getRowItems,
-    plainList: getPlainItems
+    plainList: getPlainItems,
   }
 
   if (active.value === 'list') {
@@ -187,7 +217,8 @@ function handleClick() {
 }
 </script>
 
-<route lang="json">{
+<route lang="json">
+{
   "meta": {
     "stacks": [
       "detail",
@@ -195,11 +226,9 @@ function handleClick() {
       "settings",
       {
         "name": "sign-in",
-        "children": [
-          "sign-up",
-          "forgot-password"
-        ]
+        "children": ["sign-up", "forgot-password"]
       }
     ]
   }
-}</route>
+}
+</route>

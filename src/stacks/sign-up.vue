@@ -1,33 +1,3 @@
-<script setup lang="ts">
-import { Form } from '@varlet/ui'
-import { validateNotEmpty, validateEmail, validateLength } from '@/utils/validate'
-
-const { t } = useI18n()
-const form = ref<Form>()
-const isViewPassword = ref(false)
-const isViewConfirmPassword = ref(false)
-const account = reactive({
-  username: '',
-  password: '',
-  confirmPassword: '',
-  email: '',
-  verifyCode: ''
-})
-
-async function submit() {
-  const valid = await form.value?.validate()
-
-  if (valid) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        Snackbar.success(t('Submit Success'))
-        resolve(undefined)
-      }, 1000)
-    })
-  }
-}
-</script>
-
 <template>
   <router-stack>
     <div class="sign-up">
@@ -71,7 +41,10 @@ async function submit() {
             variant="outlined"
             :placeholder="$t('Please input {field}', { field: $t('confirm password') })"
             :type="isViewConfirmPassword ? 'text' : 'password'"
-            :rules="[validateNotEmpty(), (v) => v === account.password || $t('Not match the password')]"
+            :rules="[
+              validateNotEmpty(),
+              (v) => v === account.password || $t('Not match the password'),
+            ]"
             v-model="account.confirmPassword"
           >
             <template #prepend-icon>
@@ -106,12 +79,44 @@ async function submit() {
             </template>
           </var-input>
 
-          <var-button type="primary" block size="large" auto-loading @click="submit">{{ $t('Sign Up') }}</var-button>
+          <var-button type="primary" block size="large" auto-loading @click="submit">{{
+            $t('Sign Up')
+          }}</var-button>
         </var-space>
       </var-form>
     </div>
   </router-stack>
 </template>
+
+<script setup lang="ts">
+import { Form } from '@varlet/ui'
+import { validateNotEmpty, validateEmail, validateLength } from '@/utils/validate'
+
+const { t } = useI18n()
+const form = ref<Form>()
+const isViewPassword = ref(false)
+const isViewConfirmPassword = ref(false)
+const account = reactive({
+  username: '',
+  password: '',
+  confirmPassword: '',
+  email: '',
+  verifyCode: '',
+})
+
+async function submit() {
+  const valid = await form.value?.validate()
+
+  if (valid) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        Snackbar.success(t('Submit Success'))
+        resolve(undefined)
+      }, 1000)
+    })
+  }
+}
+</script>
 
 <style lang="less" scoped>
 .sign-up {
