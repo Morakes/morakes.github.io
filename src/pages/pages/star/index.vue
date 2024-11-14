@@ -48,8 +48,8 @@ const list = ref([
     videoid: 'lejRej',
     id: 'vbmOeY',
     latestEpisodeNumber: 40,
-    totalEpisodeNum: 80
-  }
+    totalEpisodeNum: 80,
+  },
 ])
 </script>
 

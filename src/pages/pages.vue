@@ -29,18 +29,18 @@ const tabs = ref([
     label: 'HOME',
     icon: 'tabbar-home-light',
     namespace: 'i',
-    name: '/layout/home',
+    name: '/pages/home',
   },
   {
     label: 'STAR',
     icon: 'tabbar-star-dark',
-    name: '/layout/star',
+    name: '/pages/star',
     namespace: 'i',
   },
   {
     label: 'USER',
     icon: 'tabbar-user-light',
-    name: '/layout/user',
+    name: '/pages/user',
     namespace: 'i',
   },
 ])
