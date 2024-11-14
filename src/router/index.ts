@@ -7,10 +7,10 @@ const router: Router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/layout/home'
+      redirect: '/layout/home',
     },
-    ...routes
-  ]
+    ...routes,
+  ],
 })
 
 const { notify } = registryRouterChannel(router)

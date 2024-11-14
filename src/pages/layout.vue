@@ -1,46 +1,3 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue'
-
-const { router, route } = useAppRouter()
-const active = ref()
-
-const tabs = ref([
-  {
-    label: 'HOME',
-    icon: 'home',
-    name: '/layout/home'
-  },
-  {
-    label: 'TOPIC',
-    icon: 'heart',
-    name: '/layout/topic'
-  },
-  {
-    label: 'MESSAGE',
-    icon: 'border-radius',
-    namespace: 'i',
-    name: '/layout/message'
-  },
-  {
-    label: 'PROFILE',
-    icon: 'account-circle',
-    name: '/layout/profile'
-  }
-])
-
-watch(
-  () => route.path,
-  (newValue) => {
-    active.value = newValue
-  },
-  { immediate: true }
-)
-
-function to(path: string) {
-  router.replace(path)
-}
-</script>
-
 <template>
   <div class="h-[var(--app-height)] pb-[51px] overflow-y-auto">
     <router-view v-slot="{ Component }">
@@ -62,3 +19,43 @@ function to(path: string) {
     </var-bottom-navigation>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+
+const { router, route } = useAppRouter()
+const active = ref()
+
+const tabs = ref([
+  {
+    label: 'HOME',
+    icon: 'tabbar-home-light',
+    namespace: 'i',
+    name: '/layout/home'
+  },
+  {
+    label: 'STAR',
+    icon: 'tabbar-star-dark',
+    name: '/layout/star',
+    namespace: 'i'
+  },
+  {
+    label: 'USER',
+    icon: 'tabbar-user-light',
+    name: '/layout/user',
+    namespace: 'i'
+  }
+])
+
+watch(
+  () => route.path,
+  (newValue) => {
+    active.value = newValue
+  },
+  { immediate: true }
+)
+
+function to(path: string) {
+  router.replace(path)
+}
+</script>

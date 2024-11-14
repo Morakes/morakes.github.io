@@ -1,18 +1,3 @@
-<script setup lang="ts">
-import { AppBarProps } from '@varlet/ui'
-import { PropType } from 'vue'
-
-defineProps({
-  title: {
-    type: String as PropType<AppBarProps['title']>
-  },
-  titlePosition: {
-    type: String as PropType<AppBarProps['titlePosition']>,
-    default: 'center'
-  }
-})
-</script>
-
 <template>
   <var-app-bar safe-area-top fixed :z-index="100" :title="title" :title-position="titlePosition">
     <template #left>
@@ -30,3 +15,18 @@ defineProps({
     </template>
   </var-app-bar>
 </template>
+
+<script setup lang="ts">
+import { AppBarProps } from '@varlet/ui'
+import { PropType } from 'vue'
+
+defineProps({
+  title: {
+    type: String as PropType<AppBarProps['title']>
+  },
+  titlePosition: {
+    type: String as PropType<AppBarProps['titlePosition']>,
+    default: 'center'
+  }
+})
+</script>

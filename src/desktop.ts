@@ -2,7 +2,7 @@ import App from './Desktop.vue'
 import { createApp } from 'vue'
 import { inMobile } from 'rattail'
 
-import '@/styles/common.less'
+import '@/styles/common.css'
 import 'virtual:uno.css'
 
 if (inMobile()) {

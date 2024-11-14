@@ -15,8 +15,8 @@ const options: I18nOptions = {
   fallbackLocale: 'en-US',
   messages: {
     'en-US': enUS,
-    'zh-CN': zhCN
-  }
+    'zh-CN': zhCN,
+  },
 }
 
 export const i18n = createI18n<false, typeof options>(options)

@@ -8,7 +8,7 @@ import { createBounceFixer } from '@varlet/bounce-fixer'
 import { setupAppHeight } from './utils/elements'
 import { inMobile } from 'rattail'
 
-import '@/styles/common.less'
+import '@/styles/common.css'
 import '@varlet/touch-emulator'
 import 'virtual:uno.css'
 import 'virtual-icons'

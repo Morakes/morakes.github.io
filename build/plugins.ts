@@ -7,6 +7,7 @@ import vueRouter from 'unplugin-vue-router/vite'
 import icon from '@varlet/unplugin-icon-builder/vite'
 import unoCSS from 'unocss/vite'
 import { EditableTreeNode } from 'unplugin-vue-router/types'
+
 // Use as needed
 // import eruda from 'vite-plugin-eruda'
 
@@ -26,9 +27,9 @@ export function createVitePlugins() {
           'var-image': ['src'],
           'var-avatar': ['src'],
           'var-card': ['src'],
-          'var-app-bar': ['image']
-        }
-      }
+          'var-app-bar': ['image'],
+        },
+      },
     }),
 
     jsx(),
@@ -38,7 +39,7 @@ export function createVitePlugins() {
     icon({ dir: 'src/assets/icons', onDemand: true }),
 
     components({
-      resolvers: [VarletImportResolver()]
+      resolvers: [VarletImportResolver()],
     }),
 
     autoImport({
@@ -48,22 +49,22 @@ export function createVitePlugins() {
         'pinia',
         'vue-i18n',
         {
-          '@/use': ['useAppRouter']
-        }
+          '@/use': ['useAppRouter'],
+        },
       ],
       resolvers: [VarletImportResolver({ autoImport: true })],
-      eslintrc: { enabled: true }
+      eslintrc: { enabled: true },
     }),
 
     vueRouter({
       routesFolder: [
         {
-          src: 'src/pages'
+          src: 'src/pages',
         },
         {
           src: 'src/stacks',
-          path: 'stacks/'
-        }
+          path: 'stacks/',
+        },
       ],
       exclude: ['**/components/**', '**/use/**'],
       extendRoute(route) {
@@ -81,8 +82,8 @@ export function createVitePlugins() {
         }
 
         processStacks(route, stacks)
-      }
-    })
+      },
+    }),
     // eruda()
   ]
 }

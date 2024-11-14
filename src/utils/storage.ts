@@ -28,7 +28,7 @@ const createStorage = (storage: globalThis.Storage): Storage => {
 
     remove(key: string): void {
       storage.removeItem(key)
-    }
+    },
   }
 }
 

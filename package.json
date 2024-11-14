@@ -10,7 +10,7 @@
     "build:test": "vite build --mode test",
     "build:icons": "vi build",
     "preview": "vite preview",
-    "lint": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "type-check": "vue-tsc --noEmit",
     "bump": "bun update @varlet/* rattail --latest",
@@ -21,18 +21,14 @@
   },
   "config": {
     "commitizen": {
-        "path": "./node_modules/cz-customizable"
-      },
-      "cz-customizable": {
-        "config": ".cz-config.cjs"
-      }
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.cjs"
+    }
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.vue": [
+    "*.{js,ts,jsx,tsx,.vue}": [
       "prettier --write",
       "eslint --fix"
     ],
@@ -78,7 +74,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.14.1",
+    "eslint-plugin-vue": "^9.31.0",
     "husky": "^9.1.6",
     "jsdom": "^21.0.0",
     "less": "^4.1.3",

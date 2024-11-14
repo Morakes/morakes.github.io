@@ -7,13 +7,13 @@ export default {
 
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
   },
 
   server: {
     host: '0.0.0.0',
-    port: 10086
+    port: 10086,
   },
 
   build: {
@@ -21,28 +21,14 @@ export default {
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
-        desktop: fileURLToPath(new URL('./desktop.html', import.meta.url))
-      }
-    }
+        desktop: fileURLToPath(new URL('./desktop.html', import.meta.url)),
+      },
+    },
   },
 
   esbuild: {
-    drop: isProduction() ? ['console', 'debugger'] : []
+    drop: isProduction() ? ['console', 'debugger'] : [],
   },
 
-  test: {
-    environment: 'jsdom',
-    coverage: {
-      provider: 'istanbul'
-    },
-    setupFiles: ['tests/setup.ts'],
-    include: ['tests/**/*.spec.ts'],
-    server: {
-      deps: {
-        inline: ['@varlet/ui']
-      }
-    }
-  },
-
-  plugins: createVitePlugins()
+  plugins: createVitePlugins(),
 }

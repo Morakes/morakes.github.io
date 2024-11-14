@@ -1,3 +1,14 @@
+<template>
+  <teleport to="body" v-if="activated">
+    <router-view v-slot="{ Component }">
+      <transition :name="transitionName" @before-enter="handlePush" @after-enter="$emit('pushed')"
+        @before-leave="$emit('pop', pushedPath)" @after-leave="$emit('popped', pushedPath)">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+  </teleport>
+</template>
+
 <script setup lang="ts">
 import { useAppRouter } from '@/use'
 
@@ -5,12 +16,16 @@ defineOptions({
   inheritAttrs: false
 })
 
-defineProps({
+const props = defineProps({
   animation: {
     type: String,
     // slide-x slide-y
     default: 'slide-x'
   }
+})
+
+const transitionName = computed(() => {
+  return `router-stack-view-${props.animation}`
 })
 
 const emit = defineEmits(['push', 'pushed', 'pop', 'popped'])
@@ -34,22 +49,6 @@ function handlePush() {
   emit('push')
 }
 </script>
-
-<template>
-  <teleport to="body" v-if="activated">
-    <router-view v-slot="{ Component }">
-      <transition
-        :name="`router-stack-view-${animation}`"
-        @before-enter="handlePush"
-        @after-enter="$emit('pushed')"
-        @before-leave="$emit('pop', pushedPath)"
-        @after-leave="$emit('popped', pushedPath)"
-      >
-        <component :is="Component" />
-      </transition>
-    </router-view>
-  </teleport>
-</template>
 
 <style>
 .router-stack-view-slide-x-enter-active,

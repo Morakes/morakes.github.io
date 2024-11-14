@@ -14,6 +14,6 @@ export function registryRouterChannel(router: Router) {
   window.parent.postMessage({ type: 'router-channel-connected' }, '*')
 
   return {
-    notify
+    notify,
   }
 }

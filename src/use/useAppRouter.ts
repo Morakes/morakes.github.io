@@ -7,17 +7,19 @@ export function useAppRouter() {
     const currentPathEndsWithSlash = route.path.endsWith('/')
 
     router.push({
-      path: `${currentPathEndsWithSlash ? route.path.slice(0, -1) : route.path}${startsWithSlash ? path : `/${path}`}`,
+      path: `${currentPathEndsWithSlash ? route.path.slice(0, -1) : route.path}${
+        startsWithSlash ? path : `/${path}`
+      }`,
       query: {
         ...route.query,
-        ...query
-      }
+        ...query,
+      },
     })
   }
 
   return {
     route,
     router,
-    pushStack
+    pushStack,
   }
 }
