@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import Profile from './components/Profile.vue'
+import Profile from '@/components/Profile.vue'
 const isRefresh = ref(false)
 
 const items = ref([

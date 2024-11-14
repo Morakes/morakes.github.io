@@ -21,8 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-
 const { router, route } = useAppRouter()
 const active = ref()
 
