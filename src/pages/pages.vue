@@ -33,8 +33,8 @@ const tabs = ref([
   },
   {
     label: 'STAR',
-    icon: 'tabbar-star-dark',
-    name: '/pages/star',
+    icon: 'tabbar-star-light',
+    name: '/layout/star',
     namespace: 'i',
   },
   {

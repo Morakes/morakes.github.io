@@ -1,9 +1,9 @@
-import { Router, createRouter, createWebHistory } from 'vue-router'
+import { Router, createRouter, createWebHashHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
 import { registryRouterChannel } from './channel'
 
 const router: Router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',

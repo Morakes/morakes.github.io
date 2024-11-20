@@ -30,23 +30,6 @@
           </template>
         </var-cell>
       </var-paper>
-
-      <var-paper :elevation="1" class="menu-list">
-        <var-cell
-          v-for="(item, index) in items"
-          :key="item.name"
-          ripple
-          :icon="item.icon"
-          :border="index !== items.length - 1"
-          :border-offset="0"
-        >
-          {{ item.name }}
-
-          <template #extra>
-            <var-icon name="chevron-right" />
-          </template>
-        </var-cell>
-      </var-paper>
     </var-pull-refresh>
   </div>
 
@@ -65,22 +48,22 @@ const items = ref([
   },
   {
     name: '观看记录',
-    icon: 'heart',
+    icon: 'history',
     enabled: false,
   },
   {
     name: '语言',
-    icon: 'close-circle',
+    icon: 'translate',
     enabled: false,
   },
   {
     name: '反馈',
-    icon: 'close-circle',
+    icon: 'chat-processing',
     enabled: false,
   },
   {
     name: '系统设置',
-    icon: 'close-circle',
+    icon: 'cog',
     enabled: false,
   },
 ])
