@@ -19,6 +19,9 @@ export default defineConfig({
       /^text-(.*)$/,
       ([, s]) => {
         const sizes = {
+          xs: '12px',
+          md: '14px',
+          lg: '16px',
           xl: '18px',
           '2xl': '20px',
           '3xl': '22px',

@@ -16,15 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { Locale, i18n, setLocale } from '@/i18n'
+import { useLocale, Locale } from '@/use/useLocale'
+
+const { getLocale, setLocale } = useLocale()
 
 const show = ref(false)
 
 function getActiveStyles(locale: Locale) {
   return {
-    color: i18n.global.locale.value === locale ? 'var(--color-primary)' : undefined,
-    backgroundColor:
-      i18n.global.locale.value === locale ? 'var(--app-cell-active-background)' : undefined,
+    color: getLocale() === locale ? 'var(--color-primary)' : undefined,
+    backgroundColor: getLocale() === locale ? 'var(--app-cell-active-background)' : undefined,
   }
 }
 

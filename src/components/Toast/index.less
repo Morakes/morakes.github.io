@@ -1,0 +1,28 @@
+.toast {
+    .toast-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9999;
+    }
+    .toast-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        padding: 12px;
+        background: rgba(0,0,0, 0.6);
+        color: #fff;
+        text-align: center;
+        border-radius: 8px;
+    }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+}

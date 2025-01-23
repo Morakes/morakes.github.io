@@ -1,9 +1,11 @@
 <template>
-  <var-button color="transparent" text-color="#fff" round text @click="router.back">
-    <var-icon class="text-[30px]!" name="chevron-left" />
-  </var-button>
+  <var-icon class="text-[40px]!" name="chevron-left" @click="goBack" />
 </template>
 
 <script setup lang="ts">
-const { router } = useAppRouter()
+const { pushParentRoute } = useAppRouter()
+
+function goBack() {
+  pushParentRoute()
+}
 </script>

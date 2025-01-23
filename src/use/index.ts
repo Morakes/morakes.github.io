@@ -1,4 +1,6 @@
 export * from './useDark'
 export * from './useAppRouter'
 export * from './useZIndex'
-export * from './useOn'
+export * from './useLocale'
+export * from './useInstall'
+export * from './useServiceWorker'

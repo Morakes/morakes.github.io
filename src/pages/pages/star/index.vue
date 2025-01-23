@@ -1,76 +1,93 @@
 <template>
-  <var-style-provider
-    class="pt-[calc(var(--app-bar-height)+1px)]"
-    :style-vars="{ '--collapse-header-padding': '0 20px', '--collapse-content-padding': '0 20px' }"
-  >
+  <div class="root">
+    <var-style-provider>
+      <app-header :title="$t('my_favorite')" title-position="left"> </app-header>
+    </var-style-provider>
+
     <var-pull-refresh v-model="isRefresh" @refresh="handleRefresh">
-      <var-app-bar title="我的收藏" />
-      <var-list :finished="finished" v-model:loading="loading" @load="load">
-        <var-cell :key="item" v-for="item in list">
-          {{ item }}
+      <var-list
+        :finished="finished"
+        v-model:loading="loading"
+        @load="handleLoad"
+        :immediate-check="false"
+        class="min-h-xl"
+      >
+        <var-cell :key="item.videoid" v-for="item in list">
+          <star-list-item :data="item" @delete="deleteCollection" />
         </var-cell>
       </var-list>
     </var-pull-refresh>
-  </var-style-provider>
 
-  <router-stack-view />
+    <router-stack-view />
+  </div>
 </template>
 
 <script setup lang="ts">
+import StarListItem from '@/components/StarListItem.vue'
+import { apiDeleteCollection, apiGetCollectionList, CollectVideoType } from '@/apis/video'
+
 const isRefresh = ref(false)
+const finished = ref(false)
+const loading = ref(false)
+const list = ref<CollectVideoType[]>([])
+const page = reactive({
+  page: 1,
+  pagesize: 10,
+  total: 0,
+})
 
 function handleRefresh() {
-  isRefresh.value = false
+  isRefresh.value = true
+  page.page = 1
+  list.value = []
+  fetchData()
+}
+const fetchData = () => {
+  apiGetCollectionList({ page: page.page, pagesize: page.pagesize })
+    .then((res) => {
+      list.value = list.value.concat(res.data.list || [])
+      page.total = res.data.total
+    })
+    .finally(() => {
+      // 如果在刷新 则关闭刷新状态
+      if (isRefresh.value) {
+        isRefresh.value = false
+        finished.value = false
+      }
+
+      loading.value = false
+      if (list.value?.length >= page.total) {
+        finished.value = true
+      }
+    })
 }
 
-const finished = ref(false)
-
-const loading = ref(false)
-
-const load = () => {
-  console.log('fetch data')
+const handleLoad = () => {
+  loading.value = true
+  page.page++
+  fetchData()
 }
 
-const list = ref([
-  {
-    lastWatchtime: 23,
-    lastWatchPosition: 20,
-    videoName: '至尊驸马爷',
-    videoAliasName: '至尊驸马爷',
-    cover:
-      'https://image.quick.bimo8.com/series_image/env_prod/202302/c0d14bc5c1a9e98f7d1f605735e13b36_adup_1677063489143.jpg',
-    episodeNumber: 1,
-    episodeTitle: '第1集',
-    episodeIntro: '这是第1集简介',
-    chargeCoin: 0,
-    episodeDuration: 91,
-    lastEpisodeid: 'lejRej',
-    videoid: 'lejRej',
-    id: 'vbmOeY',
-    latestEpisodeNumber: 40,
-    totalEpisodeNum: 80,
-  },
-])
+const filterVideo = (videoId: string) => {
+  list.value = list.value.filter((item) => item.videoid !== videoId)
+}
+
+const deleteCollection = (e: CollectVideoType) => {
+  apiDeleteCollection({ ids: [e.videoid], isAllDel: 0 }).then(() => {
+    filterVideo(e.videoid)
+  })
+}
+
+onMounted(() => {
+  fetchData()
+})
 </script>
 
 <style lang="less" scoped>
-.topic {
+.root {
   --collapse-header-padding: 0 20px;
-
-  &-item {
-    &-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-
-    &-child {
-      padding: 0 7px;
-    }
-  }
+  background-color: var(--bg-color);
+  min-height: 100vh;
 }
 </style>
 
@@ -78,11 +95,9 @@ const list = ref([
 {
   "meta": {
     "stacks": [
-      "sign-up",
-      "settings",
       {
-        "name": "sign-in",
-        "children": ["sign-up", "forgot-password"]
+        "name": "player",
+        "children": ["tv-intro"]
       }
     ]
   }

@@ -42,13 +42,45 @@ export const darkTheme = Themes.toViewport({
   '--hsl-on-danger-container': '6, 100%, 84%',
   '--color-on-danger-container': 'hsla(var(--hsl-on-danger-container), 1)',
   '--hsl-body': '240, 7%, 11%',
-  '--color-body': 'hsla(var(--hsl-body), 1)',
   '--hsl-text': '255, 7%, 89%',
-  '--color-text': 'hsla(var(--hsl-text), 1)',
   '--hsl-on-surface-variant': '235, 10%, 79%',
   '--color-on-surface-variant': 'hsla(var(--hsl-on-surface-variant), 1)',
   '--hsl-outline': '234, 5%, 58%',
   '--color-outline': 'hsla(var(--hsl-outline), 1)',
   '--hsl-inverse-surface': '255, 7%, 89%',
   '--color-inverse-surface': 'hsla(var(--hsl-inverse-surface), 1)',
+
+  /**
+   *  自定义颜色
+   */
+
+  '--color-text': 'hsla(255, 7%, 89%, 1)',
+  // 背景色
+  'bg-color': '#22272E',
+
+  '--color-body': 'var(--bg-color)',
+  // 重要文字
+  '--font-color': '#FFFFFF',
+  // 辅助文字
+  '--font-secondary-color': '#CCCCCC',
+  // 提示文字
+  '--font-tip-color': '#666666',
+  // 禁用文字
+  '--font-disable-color': '#999999',
+
+  // 1级框架/弹窗背景
+  '--bg-layer-1': '#2A3039',
+  // 二级框架/弹窗
+  '--bg-layer-2': '#2F3947',
+  '--bg-layer-3': '#2A3039',
+  // 弹窗背景
+  '--cell-bg-layer': '#2A3039',
+  // 任务背景
+  '--task-bg-layer': '#22272E',
+
+  /**
+   * varlet 自定义主题颜色
+   */
+  // '--paper-background': 'var(--bg-layer-2)',
+  '--floating-panel-background': 'var(--dark-bg-color)',
 })

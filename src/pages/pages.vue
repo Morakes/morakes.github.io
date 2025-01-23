@@ -6,24 +6,38 @@
       </keep-alive>
     </router-view>
 
-    <var-bottom-navigation safe-area fixed v-model:active="active">
-      <var-bottom-navigation-item
-        v-for="item in tabs"
-        :key="item.label"
-        :label="$t(item.label)"
-        :icon="item.icon"
-        :name="item.name"
-        :namespace="item.namespace"
-        @click="() => to(item.name)"
-      />
-    </var-bottom-navigation>
+    <var-style-provider
+      :style-vars="{
+        '--bottom-navigation-background-color': 'var(--bg-color)',
+        '--bottom-navigation-item-active-color': 'var(--color-primary-orange)',
+        '--bottom-navigation-item-active-background-color': 'transparent',
+      }"
+    >
+      <var-bottom-navigation safe-area fixed v-model:active="active" boredr>
+        <var-bottom-navigation-item
+          v-for="item in tabs"
+          :key="item.label"
+          :label="$t(item.label)"
+          :icon="item.icon"
+          :name="item.name"
+          :namespace="item.namespace"
+          @click="() => to(item.name)"
+        />
+      </var-bottom-navigation>
+    </var-style-provider>
   </div>
+  <pwa-update-prompt />
+  <pwa-install />
 </template>
 
 <script setup lang="ts">
 const { router, route } = useAppRouter()
-const active = ref()
+import { useUserStore } from '@/store/user'
+import PwaInstall from '@/components/PwaInstall.vue'
+import PwaUpdatePrompt from '@/components/PwaUpdatePrompt.vue'
 
+const { getUserInfo } = useUserStore()
+const active = ref()
 const tabs = ref([
   {
     label: 'HOME',
@@ -32,13 +46,19 @@ const tabs = ref([
     name: '/pages/home',
   },
   {
-    label: 'STAR',
+    label: 'Favorite',
     icon: 'tabbar-star-light',
-    name: '/layout/star',
+    name: '/pages/star',
     namespace: 'i',
   },
   {
-    label: 'USER',
+    label: 'Rewards',
+    icon: 'tabbar-reward-light',
+    name: '/pages/rewards',
+    namespace: 'i',
+  },
+  {
+    label: 'Mine',
     icon: 'tabbar-user-light',
     name: '/pages/user',
     namespace: 'i',
@@ -56,4 +76,14 @@ watch(
 function to(path: string) {
   router.replace(path)
 }
+
+onMounted(async () => {
+  await getUserInfo()
+})
 </script>
+
+<style lang="less" scoped>
+// :deep(.var-bottom-navigation--fixed) {
+//   border-top: 1px solid #eee;
+// }
+</style>

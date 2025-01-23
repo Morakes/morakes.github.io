@@ -1,36 +1,40 @@
 <template>
-  <div class="profile">
-    <var-pull-refresh v-model="isRefresh" @refresh="handleRefresh">
-      <app-header>
-        <template #left>
-          <app-side-menu />
-        </template>
-        <template #right>
-          <app-locale-switch />
-          <app-theme-switch />
-        </template>
-        <template #content>
-          <profile />
-        </template>
-      </app-header>
+  <div class="root">
+    <var-space justify="flex-end" :size="8" class="p-[16px]">
+      <app-theme-switch />
+      <!-- <app-customer-service /> -->
+    </var-space>
+
+    <div class="profile">
+      <profile />
+
+      <vip-card />
 
       <var-paper :elevation="1" class="menu-list">
-        <var-cell
+        <theme-var-cell
           v-for="(item, index) in items"
           :key="item.name"
           ripple
-          :icon="item.icon"
           :border="index !== items.length - 1"
           :border-offset="0"
+          @click="pushStack(item.to)"
         >
-          {{ item.name }}
-
+          {{ $t(item.name) }}
+          <template #icon>
+            <var-image
+              :src="iconSrc(`../../../assets/icons/${item.icon}.svg`)"
+              :width="25"
+              class="mr-2"
+            />
+          </template>
           <template #extra>
             <var-icon name="chevron-right" />
           </template>
-        </var-cell>
+        </theme-var-cell>
       </var-paper>
-    </var-pull-refresh>
+
+      <login-popup v-model:show="isShow" />
+    </div>
   </div>
 
   <router-stack-view />
@@ -38,51 +42,76 @@
 
 <script setup lang="ts">
 import Profile from '@/components/Profile.vue'
-const isRefresh = ref(false)
+import VipCard from '@/components/user-page/VipCard.vue'
+import { useLoginStore, useGlobalStore } from '@/store'
 
-const items = ref([
-  {
-    name: '我的收藏',
-    icon: 'star',
-    enabled: false,
-  },
-  {
-    name: '观看记录',
-    icon: 'history',
-    enabled: false,
-  },
-  {
-    name: '语言',
-    icon: 'translate',
-    enabled: false,
-  },
-  {
-    name: '反馈',
-    icon: 'chat-processing',
-    enabled: false,
-  },
-  {
-    name: '系统设置',
-    icon: 'cog',
-    enabled: false,
-  },
-])
+const { isDark } = storeToRefs(useGlobalStore())
+const { thirdPartLoginType } = storeToRefs(useLoginStore())
+const isShow = ref(!thirdPartLoginType.value)
 
-function handleRefresh() {
-  isRefresh.value = false
+const { pushStack } = useAppRouter()
+
+const items = computed(() => {
+  return [
+    {
+      name: 'My Collection',
+      icon: `user-collect-${isDark.value ? 'dark' : 'light'}`,
+      enabled: false,
+      to: 'my-collection',
+    },
+    {
+      name: 'Watch History',
+      icon: `user-history-${isDark.value ? 'dark' : 'light'}`,
+      enabled: false,
+      to: 'watch-history',
+    },
+    // {
+    //   name: 'Spending History',
+    //   icon: 'credit-card',
+    //   enabled: false,
+    //   to: 'spending-history',
+    // },
+    {
+      name: 'Language Switch',
+      icon: `user-language-${isDark.value ? 'dark' : 'light'}`,
+      enabled: false,
+      to: 'language-switch',
+    },
+    {
+      name: 'Feedback',
+      icon: `user-feedback-${isDark.value ? 'dark' : 'light'}`,
+      enabled: false,
+      to: 'feedback',
+    },
+    {
+      name: 'System Settings',
+      icon: `user-setting-${isDark.value ? 'dark' : 'light'}`,
+      enabled: false,
+      to: 'system-setting',
+    },
+  ]
+})
+
+function iconSrc(src: string) {
+  return new URL(src, import.meta.url).href
 }
 </script>
 
 <style lang="less" scoped>
-.profile {
-  --profile-header-height: 152px;
-  --avatar-border: 3px solid #fff;
-  padding-top: calc(var(--profile-header-height) + 16px);
-}
+.root {
+  background-color: var(--bg-color);
+  min-height: 100vmax;
+  .profile {
+    --avatar-border: 3px solid #fff;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-.menu-list {
-  --cell-padding: 20px;
-  margin: 16px;
+  .menu-list {
+    --cell-padding: 20px;
+    margin-top: 16px;
+  }
 }
 </style>
 
@@ -90,11 +119,22 @@ function handleRefresh() {
 {
   "meta": {
     "stacks": [
-      "sign-up",
-      "settings",
+      "language-switch",
+      "watch-history",
+      "feedback",
+      "protocol",
+      "spending-history",
       {
-        "name": "sign-in",
-        "children": ["sign-up", "forgot-password"]
+        "name": "my-collection",
+        "children": ["player"]
+      },
+      {
+        "name": "recharge-center",
+        "children": ["recharge-record"]
+      },
+      {
+        "name": "system-setting",
+        "children": ["edit-nickname"]
       }
     ]
   }

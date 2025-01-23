@@ -16,5 +16,21 @@ declare module 'virtual-icons' {}
 declare module 'vue' {
   interface ComponentCustomProperties {
     $dayjs: typeof dayjs
+    $t: (key: string, values?: Record<string, any>) => string
   }
 }
+
+declare module 'colorthief' {
+  export type RGBColor = [number, number, number]
+  export default class ColorThief {
+    getColor: (img: HTMLImageElement, quality: number) => RGBColor | null
+
+    getPalette: (
+      img: HTMLImageElement,
+      colorCount: number = 10,
+      quality: number = 10
+    ) => RGBColor[] | null
+  }
+}
+
+declare module 'aliyun-aliplayer'

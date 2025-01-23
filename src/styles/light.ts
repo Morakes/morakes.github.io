@@ -42,13 +42,44 @@ export const lightTheme = Themes.toViewport({
   '--hsl-on-danger-container': '358, 100%, 13%',
   '--color-on-danger-container': 'hsla(var(--hsl-on-danger-container), 1)',
   '--hsl-body': '285, 100%, 99%',
-  '--color-body': 'hsla(var(--hsl-body), 1)',
   '--hsl-text': '240, 7%, 11%',
-  '--color-text': 'hsla(var(--hsl-text), 1)',
   '--hsl-on-surface-variant': '229, 7%, 29%',
   '--color-on-surface-variant': 'hsla(var(--hsl-on-surface-variant), 1)',
   '--hsl-outline': '229, 4%, 48%',
   '--color-outline': 'hsla(var(--hsl-outline), 1)',
   '--hsl-inverse-surface': '240, 4%, 20%',
   '--color-inverse-surface': 'hsla(var(--hsl-inverse-surface), 1)',
+  /**
+   *  自定义颜色
+   */
+  '--color-text': 'hsla(240, 7%, 11%, 1)',
+  // 背景色
+  '--bg-color': '#FFFFFF',
+  '--color-body': 'var(--bg-color)',
+  // 重要文字
+  '--font-color': '#333333',
+  // 辅助文字
+  '--font-secondary-color': '#666666',
+  // 提示文字
+  '--font-tip-color': '#999',
+  // 禁用文字
+  '--font-disable-color': '#D9D9D9',
+
+  // 1级框架/弹窗背景
+  '--bg-layer-1': '#ffffff',
+  // 二级框架/弹窗
+  '--bg-layer-2': '#F7F8FA',
+  // 三级框架/弹窗
+  '--bg-layer-3': '#F7F8FA',
+  // 任务背景
+  '--task-bg-layer': '#FBF4E6',
+  // 弹窗背景
+  '--cell-bg-layer': '#F7F8FA',
+
+  /**
+   * varlet 自定义主题颜色
+   */
+  // '--paper-background': 'var(--bg-layer-2)',
+  // 手动强制浮动面板背景色为黑色 由于 var-style-provider 设置失效
+  '--floating-panel-background': 'var(--dark-bg-color)',
 })

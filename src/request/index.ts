@@ -1,71 +1,59 @@
-// https://github.com/varletjs/axle
-import { createAxle, requestMockInterceptor } from '@varlet/axle'
-import { createApi } from '@varlet/axle/api'
-import { createUseAxle } from '@varlet/axle/use'
-import Mock from 'mockjs'
+import { getLangType, getOS } from '@/utils/common'
+import { alovaInstance } from './alova'
 
-export const axle = createAxle({
-  baseURL: import.meta.env.VITE_MOCK_API_BASE,
-})
+// const headers = { 'Content-Type': 'application/json;charset=UTF-8' }
 
-axle.useRequestInterceptor(
-  requestMockInterceptor({
-    mappings: [
-      {
-        url: '/**',
-        delay: 300,
-        handler({ params = {} }) {
-          const { current = 1 } = params
+type ConfigType = Parameters<typeof alovaInstance.Post>['2']
 
-          if (current === 3) {
-            return {
-              data: {
-                code: 200,
-                data: [],
-                message: 'success',
-              },
-            }
-          }
+const commonParams = {
+  langType: getLangType(),
+  timestamp: new Date().getTime(),
+  os: getOS(),
+}
 
-          const data = Array.from({ length: 10 }, () => {
-            return {
-              id: Mock.Random.id(),
-            }
-          })
-
-          return {
-            data: {
-              code: 200,
-              message: 'success',
-              data,
-            },
-          }
-        },
-      },
-    ],
-  })
-)
-
-axle.useResponseInterceptor({
-  onFulfilled(response) {
-    const { code, message } = response.data
-
-    if (code !== 200 && message) {
-      Snackbar.warning(message)
+const mergeParams = (data: any) => {
+  if (data instanceof FormData) {
+    return data
+  }
+  if (typeof data === 'object') {
+    return {
+      ...commonParams,
+      ...data,
     }
+  }
+  if (typeof data === 'undefined') {
+    return {
+      ...commonParams,
+    }
+  }
+  return {}
+}
 
-    return response.data
+export const request = {
+  get<T>(url: string, params?: Record<string, any>) {
+    return alovaInstance.Get<T>(url, {
+      params: mergeParams(params),
+    })
   },
-
-  onRejected(error) {
-    Snackbar.error(error.message)
-    return Promise.reject(error)
+  post<T>(url: string, data: Record<string, any>, config?: ConfigType) {
+    const params = mergeParams(data)
+    return alovaInstance.Post<T>(url, params, {
+      ...(config as Record<string, any>),
+    })
   },
-})
-
-export const useAxle = createUseAxle({
-  axle,
-  onTransform: (response) => response.data,
-})
-
-export const api = createApi(axle, useAxle)
+  put<T>(url: string, data?: Record<string, any>, config?: ConfigType) {
+    return alovaInstance.Put<T>(url, mergeParams(data), {
+      ...(config as Record<string, any>),
+    })
+  },
+  delete<T>(url: string, data?: Record<string, any>, config?: ConfigType) {
+    return alovaInstance.Delete<T>(url, mergeParams(data), {
+      ...(config as Record<string, any>),
+    })
+  },
+  patch<T>(url: string, data?: Record<string, any>, config?: ConfigType) {
+    return alovaInstance.Patch<T>(url, mergeParams(data), {
+      ...(config as Record<string, any>),
+    })
+  },
+}

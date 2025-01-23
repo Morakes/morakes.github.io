@@ -1,15 +1,19 @@
 import { localStorage } from '@/utils/storage'
 import { darkTheme } from '@/styles/dark'
 import { lightTheme } from '@/styles/light'
+import { STORAGE_PREFIX } from '@/constant/common'
+import { useGlobalStore } from '@/store'
 
 export function useDark() {
-  const saved = localStorage.get('prefer-dark')
+  const { isDark: _isDark } = storeToRefs(useGlobalStore())
+
+  const saved = localStorage.get(`${STORAGE_PREFIX}is_dark`)
   const isDark = ref(
     saved || (saved == null && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
 
   function updateTheme() {
-    localStorage.set('prefer-dark', isDark.value)
+    localStorage.set(`${STORAGE_PREFIX}is_dark`, isDark.value)
     StyleProvider(isDark.value ? darkTheme : lightTheme)
     document.documentElement.style.setProperty('color-scheme', isDark.value ? 'dark' : 'light')
     notify()
@@ -29,6 +33,10 @@ export function useDark() {
   }
 
   updateTheme()
+
+  watchEffect(() => {
+    _isDark.value = isDark.value
+  })
 
   return {
     isDark,

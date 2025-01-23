@@ -1,0 +1,38 @@
+:root {
+  /* 纯黑背景色 */
+  --bg-black-color: #000000;
+
+
+  /* 明亮模式背景色 */
+  --light-bg-color: #ffffff;
+
+  /* 明亮模式-重要文字 */
+  --light-font-color: #333333;
+  /* 明亮模式-辅助文字 */
+  --light-font-secondary-color: #666666;
+  /* 明亮模式-禁用文字 */
+  --light-font-disable-color: #999999;
+
+
+  /* 黑暗模式背景 */
+  --dark-bg-color: #22272e;
+
+  /* 黑暗模式- 1级框架/弹窗背景 */
+  --dark-bg-layer-1: #2A3039;
+  /* 黑暗模式- 二级框架/弹窗 */
+  --dark-bg-layer-2: #2F3947;
+
+  /* 黑暗模式-重要文字 */
+  --dark-font-color: #ffffff;
+  /* 黑暗模式-辅助文字 */
+  --dark-font-secondary-color: #999999;
+
+
+
+
+  /* 主要文字色 */
+  --color-body: rgb(34, 39, 46);
+  /* 主题色 与varui一致 --color-primary */
+  --color-primary-orange: #ffa229;
+
+}
