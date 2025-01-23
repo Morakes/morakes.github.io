@@ -3,7 +3,7 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - feature/wjl  # 你可以根据需要修改为你的默认分支，如 main 或 master
+      - feature/wjl
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"  # 根据你的项目需求设置 Node.js 版本
+          node-version: "18"  # 设置 Node.js 版本
 
       - name: Install dependencies
         run: npm install
@@ -28,4 +28,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # 部署到 gh-pages 分支
-          folder: dist      # 假设你的构建输出目录是 dist
+          folder: /docs      # 构建输出目录 dist

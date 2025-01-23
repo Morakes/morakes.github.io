@@ -39,6 +39,7 @@ export default defineConfig({
       },
     },
   },
+  publicDir: '/',
 
   esbuild: {
     drop: isProduction() ? ['console', 'debugger'] : [],
