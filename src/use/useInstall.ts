@@ -37,6 +37,7 @@ export function useInstall() {
 
     // 保存该事件，因为稍后需要触发它。
     deferredPrompt = evt
+    console.log('✅ beforeinstallprompt event fired')
 
     if (installButtonRef.value) {
       installButtonShow.value = true
