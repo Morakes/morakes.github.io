@@ -1,0 +1,1 @@
+import{d as r,e as a}from"./user-center-iIkWPMB9.js";import{f as o,r as t}from"./__uno-BriQjF_S.js";const U=o("user",()=>{const e=t();return{userInfo:e,getUserInfo:async()=>{const s=await r();e.value=s.data},updateUserInfo:async s=>{await a(s),e.value={...e.value,...s}}}});export{U as u};
