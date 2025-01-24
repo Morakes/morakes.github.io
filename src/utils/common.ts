@@ -91,3 +91,37 @@ export function timeAgo(timestamp: number): string {
 
   return result
 }
+
+/**
+ * 获取浏览器窗口大小
+ * @returns
+ */
+export function getBrowserInterfaceSize() {
+  let pageWidth = window.innerWidth
+  let pageHeight = window.innerHeight
+
+  if (typeof pageWidth != 'number') {
+    //在标准模式下面
+    if (document.compatMode == 'CSS1Compat') {
+      pageWidth = document.documentElement.clientWidth
+      pageHeight = document.documentElement.clientHeight
+    } else {
+      pageWidth = document.body.clientWidth
+      pageHeight = window.document.body.clientHeight
+    }
+  }
+
+  return {
+    pageWidth: pageWidth,
+    pageHeight: pageHeight,
+  }
+}
+
+/**
+ * 获取静态资源图片
+ * @param url 图片名称
+ * @returns 图片地址
+ */
+export function getAssetsFile(url: string, type: 'images' | 'icons' = 'icons') {
+  return new URL(`../assets/${type}/${url}`, import.meta.url).href
+}

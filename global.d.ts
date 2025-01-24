@@ -48,6 +48,7 @@ declare global {
   }
 
   interface ServiceWorkerGlobalScope extends ServiceWorkerGlobalScopeEventMap {
+    __WB_DISABLE_DEV_LOGS: boolean
     skipWaiting(): unknown
     clients: any
     registration: any

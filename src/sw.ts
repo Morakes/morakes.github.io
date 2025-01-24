@@ -6,7 +6,7 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 import { isProduction } from '../build/env'
 
 declare let self: ServiceWorkerGlobalScope
-// self.__WB_DISABLE_DEV_LOGS = true
+self.__WB_DISABLE_DEV_LOGS = true
 
 // 与缓存构建时生成的资源
 precacheAndRoute(self.__WB_MANIFEST)

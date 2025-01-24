@@ -21,11 +21,7 @@
         >
           {{ $t(item.name) }}
           <template #icon>
-            <var-image
-              :src="iconSrc(`../../../assets/icons/${item.icon}.svg`)"
-              :width="25"
-              class="mr-2"
-            />
+            <var-image :src="getAssetsFile(item.icon)" :width="25" class="mr-2" />
           </template>
           <template #extra>
             <var-icon name="chevron-right" />
@@ -44,6 +40,7 @@
 import Profile from '@/components/Profile.vue'
 import VipCard from '@/components/user-page/VipCard.vue'
 import { useLoginStore, useGlobalStore } from '@/store'
+import { getAssetsFile } from '@/utils/common'
 
 const { isDark } = storeToRefs(useGlobalStore())
 const { thirdPartLoginType } = storeToRefs(useLoginStore())
@@ -55,13 +52,13 @@ const items = computed(() => {
   return [
     {
       name: 'My Collection',
-      icon: `user-collect-${isDark.value ? 'dark' : 'light'}`,
+      icon: `user-collect-${isDark.value ? 'dark' : 'light'}.svg`,
       enabled: false,
       to: 'my-collection',
     },
     {
       name: 'Watch History',
-      icon: `user-history-${isDark.value ? 'dark' : 'light'}`,
+      icon: `user-history-${isDark.value ? 'dark' : 'light'}.svg`,
       enabled: false,
       to: 'watch-history',
     },
@@ -73,28 +70,24 @@ const items = computed(() => {
     // },
     {
       name: 'Language Switch',
-      icon: `user-language-${isDark.value ? 'dark' : 'light'}`,
+      icon: `user-language-${isDark.value ? 'dark' : 'light'}.svg`,
       enabled: false,
       to: 'language-switch',
     },
     {
       name: 'Feedback',
-      icon: `user-feedback-${isDark.value ? 'dark' : 'light'}`,
+      icon: `user-feedback-${isDark.value ? 'dark' : 'light'}.svg`,
       enabled: false,
       to: 'feedback',
     },
     {
       name: 'System Settings',
-      icon: `user-setting-${isDark.value ? 'dark' : 'light'}`,
+      icon: `user-setting-${isDark.value ? 'dark' : 'light'}.svg`,
       enabled: false,
       to: 'system-setting',
     },
   ]
 })
-
-function iconSrc(src: string) {
-  return new URL(src, import.meta.url).href
-}
 </script>
 
 <style lang="less" scoped>
@@ -126,7 +119,12 @@ function iconSrc(src: string) {
       "spending-history",
       {
         "name": "my-collection",
-        "children": ["player"]
+        "children": [
+          {
+            "name": "player",
+            "children": ["tv-intro"]
+          }
+        ]
       },
       {
         "name": "recharge-center",

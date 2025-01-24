@@ -24,7 +24,7 @@
       <div
         class="reward-register"
         :style="{
-          background: `url(/src/assets/images/reward-bg${isDark ? '-dark' : ''}.png) no-repeat`,
+          background: `url(${isDark ? RewardsBgDarkMode : RewardsBgLightMode}) no-repeat`,
           backgroundSize: 'contain',
         }"
       >
@@ -55,15 +55,10 @@
         <header class="text-[--font-color] text-lg font-600">{{ $t('mission_list') }}</header>
         <template v-for="item in taskList" :key="item">
           <div class="task-item">
-            <var-image
-              src="../../../assets/images/task-avatar.png"
-              :width="40"
-              :height="40"
-              fit="cover"
-            />
+            <var-image src="@/assets/images/task-avatar.png" :width="40" :height="40" fit="cover" />
 
             <var-space direction="column" class="flex-1">
-              <div class="flex items-center">
+              <div class="flex items-center text-nowrap">
                 {{ item.title }}
                 <div class="chip">
                   <var-image :src="GoldCoin" :heihgt="25" :width="25" />
@@ -131,6 +126,8 @@ import ThemeVarPopup from '@/components/theme-comp/ThemeVarPopup.vue'
 import { TASK_STATUS } from '@/constant/common'
 import { useUserStore } from '@/store'
 import { Toast } from '@/components/Toast'
+import RewardsBgLightMode from '@/assets/images/reward-bg.png'
+import RewardsBgDarkMode from '@/assets/images/reward-bg-dark.png'
 
 const { userInfo } = storeToRefs(useUserStore())
 const {

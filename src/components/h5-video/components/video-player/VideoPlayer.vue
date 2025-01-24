@@ -49,7 +49,8 @@ onUnmounted(() => {
 .video-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - 60px);
+  flex: 1;
+  height: calc(var(--app-height) - 60px);
   background-color: var(--bg-black-color);
   z-index: 2;
 }

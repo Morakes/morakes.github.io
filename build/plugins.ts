@@ -8,6 +8,7 @@ import icon from '@varlet/unplugin-icon-builder/vite'
 import unoCSS from 'unocss/vite'
 import { EditableTreeNode } from 'unplugin-vue-router/types'
 import { VitePWA } from 'vite-plugin-pwa'
+// import { visualizer } from 'rollup-plugin-visualizer'
 
 export interface StackRoute {
   name: string
@@ -116,21 +117,21 @@ export function createVitePlugins() {
         categories: ['short-tv'],
         background_color: '#ffffff',
         theme_color: '#ffffff',
-        start_url: '/',
+        start_url: '/panda-tv',
         display: 'standalone',
         icons: [
           {
-            src: '/panda512x512.png',
+            src: 'panda512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: '/panda192x192.png',
+            src: 'panda192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/panda64x64.png',
+            src: 'panda64x64.png',
             sizes: '64x64',
             type: 'image/png',
           },
@@ -143,7 +144,7 @@ export function createVitePlugins() {
             url: '/',
             icons: [
               {
-                src: '/panda512x512.png',
+                src: 'panda512x512.png',
                 sizes: '512x512',
                 type: 'image/png',
               },
@@ -152,12 +153,12 @@ export function createVitePlugins() {
         ],
         screenshots: [
           {
-            src: '/screenshot1.png',
+            src: 'screenshot1.png',
             sizes: '540x960',
             type: 'image/png',
           },
           {
-            src: '/screenshot2.png',
+            src: 'screenshot2.png',
             sizes: '540x960',
             type: 'image/png',
           },
@@ -168,5 +169,10 @@ export function createVitePlugins() {
         sourcemap: true,
       },
     }),
+
+    // visualizer({
+    //   emitFile: true,
+    //   filename: 'stats.html',
+    // }),
   ]
 }

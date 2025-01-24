@@ -20,7 +20,6 @@
     />
     <module-video :module-video="moduleVideoMaterial" />
   </div>
-
   <router-stack-view />
 </template>
 

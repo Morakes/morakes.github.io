@@ -82,14 +82,16 @@ onUnmounted(() => {
 </script>
 <style lang="less" scoped>
 .swiper {
-  height: 100vh;
+  position: absolute;
+  top: 0;
   width: 100%;
   background-color: var(--bg-black-color);
+  height: var(--app-height);
 }
 .swiper-slide {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: inherit;
 }
 .video-poster {
   position: absolute;

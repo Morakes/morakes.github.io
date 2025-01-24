@@ -5,7 +5,7 @@ import { useLoginStore } from '@/store/login'
 import { useFpjsStore } from '@/store/fpjs'
 
 const router: Router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory('/panda-tv'),
   routes: [
     {
       path: '/',
