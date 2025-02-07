@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "@arms/js-sdk": "1.8.36-beta.13",
     "@fingerprintjs/fingerprintjs": "^4.5.1",
     "@fingerprintjs/fingerprintjs-pro-vue-v3": "^1.5.0",
     "@varlet/axle": "^0.9.0",
