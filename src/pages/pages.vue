@@ -32,11 +32,9 @@
 
 <script setup lang="ts">
 const { router, route } = useAppRouter()
-import { useUserStore } from '@/store/user'
 import PwaInstall from '@/components/PwaInstall.vue'
 import PwaUpdatePrompt from '@/components/PwaUpdatePrompt.vue'
 
-const { getUserInfo } = useUserStore()
 const active = ref()
 const tabs = ref([
   {
@@ -67,7 +65,7 @@ const tabs = ref([
 
 watch(
   () => route.path,
-  (newValue) => {
+  (newValue: string) => {
     active.value = newValue
   },
   { immediate: true }
@@ -76,10 +74,6 @@ watch(
 function to(path: string) {
   router.replace(path)
 }
-
-onMounted(async () => {
-  await getUserInfo()
-})
 </script>
 
 <style lang="less" scoped>

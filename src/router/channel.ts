@@ -3,7 +3,7 @@ import { type Router } from 'vue-router'
 export function registryRouterChannel(router: Router) {
   window.addEventListener('message', (event) => {
     if (event.data?.type === 'route-change') {
-      router.push(event.data.path)
+      // router.push(event.data.path)
     }
   })
 

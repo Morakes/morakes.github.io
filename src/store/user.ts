@@ -6,6 +6,7 @@ export const useUserStore = defineStore('user', () => {
   const getUserInfo = async () => {
     const res = await apiGetUserInfo()
     userInfo.value = res.data
+    return res.data
   }
 
   const updateUserInfo = async (data: Partial<UserInfoType>) => {
