@@ -10,6 +10,7 @@ export class PlayerController {
   private events: { event: EVENT_KEY; handler: (...args: any[]) => void }[]
   /** 播放状态 */
   playing: Ref<boolean>
+  loading: Ref<boolean> = ref(true)
   constructor() {
     this.pm = undefined
     this.playing = ref(true)
@@ -81,16 +82,20 @@ export class PlayerController {
       showBarTime: 3,
       preload: true, //自动加载
       useH5Prism: true, //使用h5播放器
+      /**
+       * 属性设置
+       * https://www.alibabacloud.com/help/zh/vod/developer-reference/configure-skinlayout?spm=a2c63.p38356.0.i7#topic-1960009
+       */
       skinLayout: [
-        {
-          name: 'H5Loading',
-          align: 'cc',
-        },
+        // {
+        //   name: 'H5Loading',
+        //   align: 'cc',
+        // },
         {
           name: 'controlBar',
           align: 'blabs',
           x: 0,
-          y: -35,
+          y: -30,
           children: [
             { name: 'progress', align: 'blabs', x: 0, y: 0 },
             // { name: 'playButton', align: 'tl', x: 15, y: 12 },
@@ -115,24 +120,50 @@ export class PlayerController {
 
     this.pm.on('init', () => {})
 
+    /**
+     * 准备阶段
+     */
     this.pm.on('ready', () => {
-      this.pm.setVolume(0)
+      // this.pm.setVolume(0)
+      this.loading.value = false
       this.pm.play()
     })
 
+    /**
+     * 播放
+     */
     this.pm.on('play', () => {
       useEmit(EVENT_KEY.PLAY, { pTime: this.pm.getCurrentTime() })
     })
 
+    /**
+     * 播放中
+     */
     this.pm.on('playing', () => {
       this.playing.value = true
+
+      if (this.loading.value) {
+        this.loading.value = false
+      }
     })
 
+    /**
+     * 播放暂停
+     */
     this.pm.on('pause', () => {
       this.playing.value = false
       useEmit(EVENT_KEY.PAUSE, { pTime: this.pm.getCurrentTime() })
     })
+    /**
+     * 数据缓冲
+     */
+    this.pm.on('waiting', () => {
+      this.loading.value = true
+    })
 
+    /**
+     * 播放失败
+     */
     this.pm.on('error', function (e: any) {
       const errorData = e.paramData
       useEmit(EVENT_KEY.WATCHED_ERROR)
@@ -147,6 +178,9 @@ export class PlayerController {
       })
     )
 
+    /**
+     * 播放器时间更新
+     */
     this.pm.on(
       'timeupdate',
       useThrottleFn(() => {
@@ -158,6 +192,9 @@ export class PlayerController {
       }, 1000)
     )
 
+    /**
+     * 播放器销毁
+     */
     this.pm.on('dispose', () => {
       // 进入可播放状态之后才进行上报  防止剧集滑动过快产生无用上报
       if (['loading', 'ready', 'init'].includes(this.pm.getStatus())) return
@@ -166,7 +203,7 @@ export class PlayerController {
       useEmit(EVENT_KEY.CHANGE_EPOSIDE)
     })
 
-    /** 拖拽进度条触发进度更新 目前可以不用 因为 timeupdate 事件会自动触发每隔三秒 */
+    /** 拖拽进度条触发进度更新 目前可以不用 因为 timeupdate 事件会自动触发每隔1秒 */
     // this.pm.on('completeSeek', (e: any) => {
     //   useEmit(EVENT_KEY.UPDATE_PROGRESS, { pTime: e.paramData as number })
     // })

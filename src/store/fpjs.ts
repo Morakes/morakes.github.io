@@ -14,7 +14,7 @@ export const useFpjsStore = defineStore(
       }
     )
     /**
-     * 获取【备用】设备指纹
+     * 获取【备用】设备指纹，因为正式的设备指纹Key值有时效性，所以正式失效需要获取备用的
      * @returns
      */
     const getAlternateDeviceData = async () => {

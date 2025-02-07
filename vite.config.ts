@@ -37,6 +37,11 @@ export default defineConfig({
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         desktop: fileURLToPath(new URL('./desktop.html', import.meta.url)),
       },
+      output: {
+        entryFileNames: 'js/[name]-[hash:8].js',
+        assetFileNames: 'assets/[name]-[hash:8][extname]',
+        chunkFileNames: 'js/[name]-[hash:8].js',
+      },
     },
   },
 

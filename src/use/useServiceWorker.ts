@@ -51,6 +51,8 @@ export function useServiceWorker() {
   const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
     // 有新版本需要更新时的回调
     onNeedRefresh() {
+      // 有更新时弹出更新提示（暂时先关闭）
+      return
       Dialog({
         title: i18n.global.t('update_available'),
         message: i18n.global.t('update_ready'),

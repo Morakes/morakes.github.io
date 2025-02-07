@@ -9,16 +9,30 @@
       <play-back />
       <!-- 剧集介绍 -->
       <author-intro />
+
       <!-- 横板 -->
       <!-- <var-image
-        :src="ViewScreenBtn"
-        class="absolute top-[80%] left-[50%] translate-x-[-50%]"
-        width="150px"
-        height="auto"
-        @click="playerController.reverse()"
+      :src="ViewScreenBtn"
+      class="absolute top-[80%] left-[50%] translate-x-[-50%]"
+      width="150px"
+      height="auto"
+      @click="playerController.reverse()"
       /> -->
     </div>
 
+    <var-loading
+      v-show="playerController.loading.value"
+      :radius="30"
+      style="
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      "
+    />
+
+    <!-- 播放按钮 -->
     <var-image
       src="@/assets/images/play-btn.png"
       v-show="!playerController.playing.value"
@@ -53,6 +67,13 @@ onUnmounted(() => {
   height: calc(var(--app-height) - 60px);
   background-color: var(--bg-black-color);
   z-index: 2;
+  :deep(.prism-player .prism-progress-hover) {
+    height: 1vmin !important;
+  }
+  // 修改进度条颜色
+  :deep(.prism-player .prism-progress .prism-progress-played) {
+    background-color: #ffa327 !important;
+  }
 }
 .player-btn {
   position: absolute;

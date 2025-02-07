@@ -156,6 +156,7 @@ const hasBadge = (badge: Style['badge']) => {
     }
     &__coin {
       position: relative;
+      text-align: center;
     }
     &__badge {
       position: absolute;

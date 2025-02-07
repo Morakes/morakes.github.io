@@ -66,7 +66,12 @@ function createPlayerStore() {
     Object.assign(state, updates)
   }
 
-  async function init({ videoId, episodeId }: { videoId: string; episodeId: string }) {
+  /**
+   * 初始化数据
+   * @param param
+   */
+
+  async function init({ videoId, episodeId }: { videoId: string; episodeId?: string }) {
     await _fetchVideoList(videoId)
     await _fetchEpisodeList(videoId)
     if (state.episodeList.length > 0) {
@@ -78,6 +83,11 @@ function createPlayerStore() {
     }
   }
 
+  /**
+   * 获取当前episode详情
+   * @param episodeid
+   * @returns
+   */
   async function getEpisodeDetail(episodeid: string = state.episodeId) {
     try {
       const res = await apiGetEpisodeDetail({ episodeid, videoid: state.videoInfo.videoid })
