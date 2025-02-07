@@ -10,8 +10,6 @@ export function useServiceWorker() {
   function registerPeriodicSync(swUrl: string, r: ServiceWorkerRegistration) {
     if (UPDATE_CHECK_PERIOD < 0) return
 
-    let checkInterval: NodeJS.Timer
-
     const checkUpdate = async () => {
       try {
         if ('onLine' in navigator && !navigator.onLine) {
@@ -39,11 +37,11 @@ export function useServiceWorker() {
       }
     }
 
-    checkInterval = setInterval(checkUpdate, UPDATE_CHECK_PERIOD)
+    const checkInterval = window.setInterval(checkUpdate, UPDATE_CHECK_PERIOD)
 
     return () => {
       if (checkInterval) {
-        clearInterval(checkInterval as NodeJS.Timeout)
+        window.clearInterval(checkInterval)
       }
     }
   }
@@ -52,7 +50,8 @@ export function useServiceWorker() {
     // 有新版本需要更新时的回调
     onNeedRefresh() {
       // 有更新时弹出更新提示（暂时先关闭）
-      return
+      if (process.env.NODE_ENV !== 'production') return
+
       Dialog({
         title: i18n.global.t('update_available'),
         message: i18n.global.t('update_ready'),

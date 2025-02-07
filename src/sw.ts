@@ -3,7 +3,6 @@ import { registerRoute } from 'workbox-routing'
 import { NetworkFirst, CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
-import { isProduction } from '../build/env'
 
 declare let self: ServiceWorkerGlobalScope
 self.__WB_DISABLE_DEV_LOGS = true
@@ -122,10 +121,19 @@ self.addEventListener('notificationclick', (event) => {
   event.waitUntil(self.clients.openWindow('/'))
 })
 
-// 安装后立即激活 Service Worker
-self.skipWaiting()
-// Service Worker 激活后立即接管页面
-self.clients.claim()
+// // 安装后立即激活 Service Worker
+// self.skipWaiting()
+// // Service Worker 激活后立即接管页面
+// self.clients.claim()
+
+self.addEventListener('install', () => {
+  // 跳过等待阶段，直接激活新的 Service Worker
+  self.skipWaiting()
+})
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(self.clients.claim())
+})
 
 /**
  * 缓存管理：
