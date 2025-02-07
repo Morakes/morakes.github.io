@@ -3,12 +3,12 @@ import router from '@/router'
 import dayjs from 'dayjs'
 import { i18n } from '@/i18n'
 import { createBounceFixer } from '@varlet/bounce-fixer'
-import { inMobile } from 'rattail'
 
 import { setupAppHeight } from './utils/elements'
 import { setupFpjsPlugin } from './plugin/fpjs-plugin'
 import { setupPinia } from './store'
 import { setupARMS } from './plugin/arms'
+import { setupDesktopInMobile } from '@/use/useDesktop'
 
 import '@/styles/common.css'
 import '@varlet/touch-emulator'
@@ -20,12 +20,8 @@ import 'virtual-icons'
 
 // 初始化arms
 setupARMS()
-
-if (!inMobile() && window === window.parent) {
-  // window.location.replace('./desktop.html')
-}
+setupDesktopInMobile()
 setupAppHeight()
-
 createBounceFixer().enable()
 
 const app = createApp(App)

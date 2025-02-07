@@ -1,10 +1,10 @@
 import { Router, createRouter, createWebHashHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
-import { registryRouterChannel } from './channel'
 import { useLoginStore } from '@/store/login'
 import { useFpjsStore } from '@/store/fpjs'
 import { useUserStore } from '@/store/user'
 import { UserInfoType } from '@/apis/user-center'
+import { setupDesktopChannel } from './desktopChannel'
 
 const router: Router = createRouter({
   history: createWebHashHistory('/panda-tv'),
@@ -16,8 +16,6 @@ const router: Router = createRouter({
     ...routes,
   ],
 })
-
-const { notify } = registryRouterChannel(router)
 
 router.beforeEach(async (to) => {
   const { login, getToken } = useLoginStore()
@@ -47,8 +45,10 @@ router.beforeEach(async (to) => {
       })
     })
   }
+})
 
-  notify(to.fullPath)
+router.isReady().then(() => {
+  setupDesktopChannel(router)
 })
 
 export default router
