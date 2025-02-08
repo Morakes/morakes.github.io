@@ -1,7 +1,6 @@
 import { i18n } from '@/i18n'
 import { Locale as VarLocale } from '@varlet/ui'
-import { localStorage } from '@/utils/storage'
-import { getCurrentInstance } from 'vue'
+import { customLocalStorage } from '@/utils/storage'
 
 export enum Locale {
   'zh-CN' = 'zh-CN',
@@ -15,7 +14,7 @@ export const useLocale = () => {
     return i18n.global.locale.value as Locale
   }
   function setLocale(locale: Locale) {
-    localStorage.set('locale', locale)
+    customLocalStorage.set('locale', locale)
     i18n.global.locale.value = locale
     VarLocale.use(locale)
   }

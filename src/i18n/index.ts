@@ -1,11 +1,11 @@
 import { I18nOptions, createI18n } from 'vue-i18n'
-import { localStorage } from '@/utils/storage'
+import { customLocalStorage } from '@/utils/storage'
 import { Locale as VarLocale } from '@varlet/ui'
 import enUS from './messages/en-US.json'
 import zhCN from './messages/zh-CN.json'
 import { DEFAULT_LOCALE } from '@/constant/common'
 
-const sotrageLocale = localStorage.get('locale')
+const sotrageLocale = customLocalStorage.get('locale')
 
 VarLocale.add('en-US', VarLocale.enUS)
 VarLocale.use(sotrageLocale ?? DEFAULT_LOCALE)

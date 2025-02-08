@@ -34,6 +34,6 @@ const createStorage = (storage: globalThis.Storage): Storage => {
   }
 }
 
-export const sessionStorage = createStorage(globalThis.sessionStorage)
+export const customSessionStorage = createStorage(globalThis.sessionStorage)
 
-export const localStorage = createStorage(globalThis.localStorage)
+export const customLocalStorage = createStorage(globalThis.localStorage)

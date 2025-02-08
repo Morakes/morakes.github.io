@@ -1,4 +1,4 @@
-import { localStorage } from '@/utils/storage'
+import { customLocalStorage } from '@/utils/storage'
 import { darkTheme } from '@/styles/dark'
 import { lightTheme } from '@/styles/light'
 import { useGlobalStore } from '@/store'
@@ -6,13 +6,13 @@ import { useGlobalStore } from '@/store'
 export function useDark() {
   const { isDark: _isDark } = storeToRefs(useGlobalStore())
 
-  const saved = localStorage.get('is_dark')
+  const saved = customLocalStorage.get('is_dark')
   const isDark = ref(
     saved || (saved == null && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
 
   function updateTheme() {
-    localStorage.set('is_dark', isDark.value)
+    customLocalStorage.set('is_dark', isDark.value)
     StyleProvider(isDark.value ? darkTheme : lightTheme)
     document.documentElement.style.setProperty('color-scheme', isDark.value ? 'dark' : 'light')
     notify()

@@ -9,14 +9,14 @@
 import H5Video from '@/components/h5-video/index.vue'
 import { useAppRouter } from '@/use'
 import { playerStore, PlayerStoreController } from '@/components/h5-video/store/index'
-import { sessionStorage } from '@/utils/storage'
+import { customSessionStorage } from '@/utils/storage'
 
 // 初始化缓存数据
 PlayerStoreController.initial()
 const { route } = useAppRouter()
 
 function getCacheEposide(videoId: string) {
-  const watchedRecord = sessionStorage.get('watched_record') as Record<string, any>
+  const watchedRecord = customSessionStorage.get('watched_record') as Record<string, any>
   if (!watchedRecord || !watchedRecord[videoId]) return undefined
   return watchedRecord[videoId].episodeId
 }

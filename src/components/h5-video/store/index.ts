@@ -5,7 +5,7 @@ import { defaultEpisodeDetail, defaultVideoInfo } from './config'
 import { StateType } from './type'
 import { useAppRouter } from '@/use'
 import { EVENT_KEY, useEmit } from '../hooks/useMitt'
-import { sessionStorage } from '@/utils/storage'
+import { customSessionStorage } from '@/utils/storage'
 
 // 实例存储
 let playerStore: ReturnType<typeof createPlayerStore>
@@ -137,9 +137,9 @@ function createPlayerStore() {
    * 缓存观看记录
    */
   function cacheWatchedRecord() {
-    const watchedRecord = sessionStorage.get('watched_record') || {}
+    const watchedRecord = customSessionStorage.get('watched_record') || {}
 
-    sessionStorage.set(
+    customSessionStorage.set(
       'watched_record',
       Object.assign(watchedRecord, {
         [playerStore.state.videoId]: {
