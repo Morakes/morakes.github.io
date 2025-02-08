@@ -105,7 +105,9 @@ export interface HistoryListType {
  * @returns HistoryListType[]
  */
 export const apiGetWatchHistory = (data: Page) => {
-  return request.get<Res<{ list: HistoryListType[] }>>('/h5/v1/watched/list', data).send(true)
+  return request
+    .get<Res<{ list: HistoryListType[]; total: number }>>('/h5/v1/watched/list', data)
+    .send(true)
 }
 
 /**

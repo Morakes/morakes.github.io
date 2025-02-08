@@ -113,12 +113,20 @@ const items = computed(() => {
   "meta": {
     "stacks": [
       "language-switch",
-      "watch-history",
       "feedback",
       "protocol",
       "spending-history",
       {
         "name": "my-collection",
+        "children": [
+          {
+            "name": "player",
+            "children": ["tv-intro"]
+          }
+        ]
+      },
+      {
+        "name": "watch-history",
         "children": [
           {
             "name": "player",
