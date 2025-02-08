@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { HomeDataType } from '@/apis/home'
+import { HomeDataType, VideoListType } from '@/apis/home'
 import { isGird, isScroll, isVertical, getDefaultConfig } from './config'
 import VerticalMode from './components/VerticalMode.vue'
 import ScrollMode from './components/ScrollMode.vue'
@@ -47,9 +47,9 @@ withDefaults(
   }
 )
 
-const handleGoTo = (videoId: string) => {
+const handleGoTo = (data: VideoListType) => {
   pushStack('player', {
-    videoId: videoId,
+    videoId: data.videoid,
   })
 }
 </script>

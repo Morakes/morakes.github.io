@@ -66,4 +66,6 @@ export enum EVENT_KEY {
   SET_FLOATING_PANEL = 'SET_FLOATING_PANEL',
   /** 通知store更新初始数据 即更换视频数据 */
   INIT_STORE_DATA = 'INIT_STORE_DATA',
+  /** 切换剧集 */
+  EPISODE_CHANGE = 'EPISODE_CHANGE',
 }

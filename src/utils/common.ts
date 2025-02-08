@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, STORAGE_PREFIX } from '@/constant/common'
+import { DEFAULT_LOCALE } from '@/constant/common'
 import { localStorage } from './storage'
 import { i18n, Locale } from '@/i18n'
 import dayjs from 'dayjs'
@@ -39,7 +39,7 @@ export const getLangType = () => {
     'en-US': 2,
   }
   // return langMap[navigator.language.includes('zh') ? 'zh-CN' : 'en-US']
-  return langMap[(localStorage.get(`${STORAGE_PREFIX}locale`) as string) || DEFAULT_LOCALE]
+  return langMap[(localStorage.get('locale') as string) || DEFAULT_LOCALE]
 }
 
 /**

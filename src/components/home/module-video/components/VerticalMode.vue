@@ -1,7 +1,7 @@
 <template>
   <custom-skeleton :loading="loading" avatar :rows="3">
     <template v-for="video in list" :key="video.videoId">
-      <div class="block flex gap-[10px] mb-[10px] px-[10px]" @click="handleGoTo(video.videoid)">
+      <div class="block flex gap-[10px] mb-[10px] px-[10px]" @click="handleGoTo(video)">
         <cover-image v-bind="coverProps" :cover="video.cover" :detail="video.totalEpisodeNum" />
         <var-space direction="column" size="4px" class="mt-1 relative w-full">
           <var-ellipsis :tooltip="false" line-clamp="2" class="text-md text-[var(--font-color)]">
@@ -38,12 +38,12 @@ const props = withDefaults(defineProps<Props>(), {
   list: () => [],
 })
 const emits = defineEmits<{
-  (e: 'go-to', videoId: string): void
+  (e: 'go-to', data: VideoListType): void
 }>()
 
 const loading = ref(true)
-const handleGoTo = (videoId: string) => {
-  emits('go-to', videoId)
+const handleGoTo = (data: VideoListType) => {
+  emits('go-to', data)
 }
 
 watch(

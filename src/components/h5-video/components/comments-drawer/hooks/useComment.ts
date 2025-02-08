@@ -1,4 +1,6 @@
 import { apiGetCommentList, apiPublishComment, apiReplyComment, CommentType } from '@/apis/video'
+import { Toast } from '@/components/Toast'
+import { i18n } from '@/i18n'
 
 export interface PayloadType {
   type: 'comment' | 'reply'
@@ -68,7 +70,11 @@ export function useComment({
       playTime: playTime.value!,
     })
 
-    Snackbar.success('提交成功')
+    Toast({
+      content: i18n.global.t('submit_success'),
+      overlay: false,
+      duration: 1500,
+    })
   }
 
   /** 提交回复 */
@@ -81,7 +87,11 @@ export function useComment({
       playTime: playTime.value!,
       commentid: payload.commentid!,
     })
-    Snackbar.success('提交成功')
+    Toast({
+      content: i18n.global.t('submit_success'),
+      overlay: false,
+      duration: 1500,
+    })
   }
 
   /** 获取评论列表 */

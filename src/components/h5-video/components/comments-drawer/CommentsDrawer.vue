@@ -40,7 +40,7 @@
           <div
             v-show="!isShowSendBtn"
             class="replace-input"
-            @click="focusInput({ type: 'comment', placeholder: '评论' })"
+            @click="focusInput({ type: 'comment', placeholder: $t('comment') })"
           >
             {{ $t('comment_placeholder') }}
           </div>

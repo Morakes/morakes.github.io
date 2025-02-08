@@ -1,9 +1,7 @@
 import { EVENT_KEY, useEmit, useOn } from '../hooks/useMitt'
 import { playerStore } from '../store/index'
-import { useAppRouter } from '@/use'
 
 export class CommonEvent {
-  private router = useAppRouter()
   private events = [
     {
       event: EVENT_KEY.SET_FLOATING_PANEL,

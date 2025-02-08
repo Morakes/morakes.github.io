@@ -5,6 +5,7 @@ import { defaultEpisodeDetail, defaultVideoInfo } from './config'
 import { StateType } from './type'
 import { useAppRouter } from '@/use'
 import { EVENT_KEY, useEmit } from '../hooks/useMitt'
+import { sessionStorage } from '@/utils/storage'
 
 // 实例存储
 let playerStore: ReturnType<typeof createPlayerStore>
@@ -39,6 +40,7 @@ function createPlayerStore() {
     playTime: 0,
   })
 
+  // 监听剧集变化 更新currentEposide
   watchEffect(() => {
     if (!state.episodeList.length || !state.episodeId) return
     // 等待数据初始化之后 更新currentEpisode
@@ -131,6 +133,23 @@ function createPlayerStore() {
     return state.isLockedEpisode
   }
 
+  /**
+   * 缓存观看记录
+   */
+  function cacheWatchedRecord() {
+    const watchedRecord = sessionStorage.get('watched_record') || {}
+
+    sessionStorage.set(
+      'watched_record',
+      Object.assign(watchedRecord, {
+        [playerStore.state.videoId]: {
+          videoId: playerStore.state.videoId,
+          episodeId: playerStore.state.episodeId,
+        },
+      })
+    )
+  }
+
   return {
     state,
     updateStore,
@@ -138,6 +157,7 @@ function createPlayerStore() {
     getEpisodeDetail,
     checkLock,
     getEpisodeNumber,
+    cacheWatchedRecord,
   }
 }
 

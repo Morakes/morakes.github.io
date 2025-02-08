@@ -1,3 +1,5 @@
+import { STORAGE_PREFIX } from '@/constant/common'
+
 export interface Storage extends globalThis.Storage {
   set(key: string, value: any): void
   get(key: string): any
@@ -13,11 +15,11 @@ const createStorage = (storage: globalThis.Storage): Storage => {
         value = JSON.stringify(value)
       }
 
-      storage.setItem(key, value as string)
+      storage.setItem(`${STORAGE_PREFIX}${key}`, value as string)
     },
 
     get(key: string) {
-      const data = storage.getItem(key) as string
+      const data = storage.getItem(`${STORAGE_PREFIX}${key}`) as string
 
       try {
         return JSON.parse(data)
@@ -27,7 +29,7 @@ const createStorage = (storage: globalThis.Storage): Storage => {
     },
 
     remove(key: string): void {
-      storage.removeItem(key)
+      storage.removeItem(`${STORAGE_PREFIX}${key}`)
     },
   }
 }

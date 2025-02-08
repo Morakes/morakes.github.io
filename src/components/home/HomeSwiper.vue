@@ -4,15 +4,10 @@
       <!-- swiepr背景 -->
       <var-swipe class="swipe-container" :autoplay="3000" :loop="true">
         <template v-for="item in bannerMaterial" :key="item">
-          <var-swipe-item>
+          <var-swipe-item @click="handleTo(item.redirectConfig)">
             <img class="swipe-slide-image" :src="item.bannerImg" />
             <!-- 播放器按钮 -->
-            <img
-              class="swiper-slide-player"
-              :src="BtnPlayer"
-              alt="button-palyer"
-              @click="handleTo(item)"
-            />
+            <img class="swiper-slide-player" :src="BtnPlayer" alt="button-palyer" />
           </var-swipe-item>
         </template>
         <!-- 自定义指示器 -->
@@ -54,7 +49,7 @@
 import BtnPlayer from '@/assets/images/btn-player.png'
 import PandaSearchBg from '@/assets/images/panda-search-bg.png'
 import { useAppRouter } from '@/use'
-import { HomeDataType, NavigationType } from '@/apis/home'
+import { HomeDataType, NavigationType, RedirectConfigType } from '@/apis/home'
 
 const props = withDefaults(
   defineProps<{
@@ -81,8 +76,8 @@ const active = computed({
 
 const { pushStack } = useAppRouter()
 
-const handleTo = (payload: any) => {
-  console.log(payload)
+const handleTo = (payload: RedirectConfigType) => {
+  pushStack('player', { videoId: payload.id })
 }
 </script>
 

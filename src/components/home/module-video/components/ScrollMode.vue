@@ -8,7 +8,7 @@
         <div
           class="block shrink-0 flex-nowrap"
           :style="{ flexBasis: basisWidth }"
-          @click="handleGoTo(video.videoid)"
+          @click="handleGoTo(video)"
         >
           <cover-image
             :badge="'news'"
@@ -41,12 +41,12 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emits = defineEmits<{
-  (e: 'go-to', videoId: string): void
+  (e: 'go-to', data: VideoListType): void
 }>()
 
 const loading = ref(true)
-const handleGoTo = (videoId: string) => {
-  emits('go-to', videoId)
+const handleGoTo = (data: VideoListType) => {
+  emits('go-to', data)
 }
 
 watch(

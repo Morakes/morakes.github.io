@@ -2,6 +2,7 @@ import { Swiper as SwiperType } from 'swiper/types'
 import { playerStore } from './store'
 import { EVENT_KEY, useEmit, useOn } from './hooks/useMitt'
 import { ModuleInject } from './modules'
+import { sessionStorage } from '@/utils/storage'
 
 export class SwiperManager {
   private swiperInstance: SwiperType | null = null
@@ -77,19 +78,28 @@ export class SwiperManager {
     return this.activeIndex.value !== playerStore.state.episodeList.length - 1
   }
 
+  /**
+   * 触摸滑动结束
+   */
   private handleTouchEnd() {
     this.isTransitioning = true
   }
+  /**
+   * swiper slide切换完成
+   */
   private handleTransitionEnd() {
     if (this.isTransitioning) {
       this.isTransitioning = false
       if (this.swiperInstance) {
         this.activeIndex.value = this.swiperInstance.activeIndex
-
+        // 更新当前播放的episodeid
         playerStore.updateStore({
           episodeId: playerStore.state.episodeList[this.swiperInstance.activeIndex].episodeid,
         })
+        // 检查是否锁定
         playerStore.checkLock()
+        // 缓存观看记录
+        playerStore.cacheWatchedRecord()
       }
     }
   }

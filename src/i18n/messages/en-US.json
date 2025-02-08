@@ -164,7 +164,7 @@
   "send": "Send",
   "reply": "Reply",
   "reply_placeholder": "Reply to @%s",
-  "expand_reply": "Expand %s replies",
+  "expand_reply": "Expand {0} replies",
   "expand_more": "Expand more",
   "collapse": "Collapse",
   "no_more": "The End",

@@ -8,7 +8,7 @@
             :badge="'New'"
             :detail="item.totalEpisodeNum"
             v-bind="coverProps"
-            @click="handleGoTo(item.videoid)"
+            @click="handleGoTo(item)"
           />
           <var-space direction="column" size="4px" class="mt-1">
             <var-ellipsis :tooltip="true" line-clamp="2" class="text-md text-[var(--font-color)]">
@@ -33,12 +33,12 @@ interface Props {
 const props = defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: 'go-to', videoId: string): void
+  (e: 'go-to', data: VideoListType): void
 }>()
 
 const loading = ref(true)
-const handleGoTo = (videoId: string) => {
-  emits('go-to', videoId)
+const handleGoTo = (data: VideoListType) => {
+  emits('go-to', data)
 }
 
 watch(
@@ -46,7 +46,7 @@ watch(
   () => {
     if (!props.list.length) return
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       loading.value = false
     }, 300)
   },

@@ -189,6 +189,8 @@ export class PlayerController {
         playerStore.updateStore({
           playTime: Math.floor(this.pm.getCurrentTime()),
         })
+        console.log('112233');
+
       }, 1000)
     )
 
