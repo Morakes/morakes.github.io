@@ -1,0 +1,1 @@
+import{$ as p,a8 as r}from"./virtual.icons-D10fFipR.js";const o=Symbol("POPUP_BIND_POPUP_ITEM_KEY");function s(){const{bindParent:n,parentProvider:P,index:e}=r(o);return{index:e,popup:P,bindPopup:n}}function u(){const{bindChildren:n,childProviders:P,length:e}=p(o);return{length:e,popupItems:P,bindPopupItems:n}}export{u as a,s as u};

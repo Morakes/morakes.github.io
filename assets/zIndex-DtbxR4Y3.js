@@ -1,1 +1,0 @@
-import{s as e}from"./elevation-DPVd9_5b.js";import{r as d,m as s}from"./__uno-BriQjF_S.js";function o(n,r){const t=d(e.zIndex);return s(n,a=>{a&&(e.zIndex+=r,t.value=e.zIndex)},{immediate:!0}),{zIndex:t}}export{o as u};

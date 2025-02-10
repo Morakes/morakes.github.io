@@ -1,0 +1,1 @@
+import{r as e}from"./virtual.icons-D10fFipR.js";const r=async()=>e.get("/h5/v1/navigation",{}),s=async t=>e.get("/h5/v1/index",{navid:t}),n=async()=>e.get("/h5/v1/hotsearch").send(!0),o=t=>e.get("/h5/v1/watched/list",t).send(!0),c=t=>e.post("/h5/v1/search",t);export{s as a,r as b,o as c,n as d,c as e};

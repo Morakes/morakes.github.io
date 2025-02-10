@@ -1,0 +1,1 @@
+import{b as e}from"./ripple-Cq5wOOC2.js";import{g as d,m as i}from"./virtual.icons-D10fFipR.js";function s(n,r){const t=d(e.zIndex);return i(n,a=>{a&&(e.zIndex+=r,t.value=e.zIndex)},{immediate:!0}),{zIndex:t}}export{s as u};
