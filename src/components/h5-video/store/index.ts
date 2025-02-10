@@ -1,4 +1,3 @@
-import { reactive } from 'vue'
 import { apiGetEpisodeDetail, apiGetEpisodeInfo, apiGetVideoInfo, EpisodeType } from '@/apis/video'
 import { LOCK_STATUS } from '@/constant/common'
 import { defaultEpisodeDetail, defaultVideoInfo } from './config'

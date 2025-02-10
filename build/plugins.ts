@@ -8,7 +8,7 @@ import icon from '@varlet/unplugin-icon-builder/vite'
 import unoCSS from 'unocss/vite'
 import { EditableTreeNode } from 'unplugin-vue-router/types'
 import { VitePWA } from 'vite-plugin-pwa'
-import { visualizer } from 'rollup-plugin-visualizer'
+// import { visualizer } from 'rollup-plugin-visualizer'
 
 export interface StackRoute {
   name: string
@@ -170,9 +170,9 @@ export function createVitePlugins() {
       },
     }),
 
-    visualizer({
-      emitFile: true,
-      filename: 'stats.html',
-    }),
+    // visualizer({
+    //   emitFile: true,
+    //   filename: 'stats.html',
+    // }),
   ]
 }

@@ -14,10 +14,6 @@ export function useAutoComplete(
     })
   })
 
-  watchEffect(() => {
-    console.log(options.value)
-  })
-
   return {
     options,
   }
